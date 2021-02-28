@@ -8,12 +8,12 @@
   <meta name="google-site-verification" content="" />
   <meta name="referrer" content="unsafe-url">
   
-  <title>Fun problems with Scala</title>
+  <title>Fun Algorithms</title>
   <meta name="author" content="Axiwa">
   <meta name="description" content="Silent site">
   
   
-  <meta property="og:title" content="Fun problems with Scala"/>
+  <meta property="og:title" content="Fun Algorithms"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="Azure"/>
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
@@ -43,19 +43,19 @@
       
   
     <h1 class="page-title center">
-        Fun problems with Scala
+        Fun Algorithms
     </h1>
   
 
 
     </div>
     <div class="meta center">
-      <time datetime="2021-01-24T17:33:46.523Z" itemprop="datePublished">
+      <time datetime="2021-02-16T13:12:22.719Z" itemprop="datePublished">
   <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
   </svg>
   &nbsp;
-  2021-01-24
+  2021-02-16
 </time>
 
 
@@ -66,7 +66,7 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#N-Queens"><span class="toc-text">N-Queens</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Water-pouring-puzzle"><span class="toc-text">Water pouring puzzle</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#N-Queens"><span class="toc-text">N-Queens</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KMP"><span class="toc-text">KMP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Water-pouring-puzzle"><span class="toc-text">Water pouring puzzle</span></a></li></ol>
     
     <div class="picture-container">
       
@@ -76,6 +76,7 @@
 </blockquote>
 <p>We can solve this problem with a recursive algorithm. Suppose each queen is placed in each row, i.e. n queens takes row 1 to row n, and we should determine their columns.</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queens</span></span>(n: <span class="type">Int</span>)= </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">placeQueens</span></span>(k: <span class="type">Int</span>): <span class="type">Set</span>[<span class="type">List</span>[<span class="type">Int</span>]] = <span class="comment">// with k queens, the set of solutions</span></span><br><span class="line">        <span class="keyword">if</span> k==<span class="number">0</span> then <span class="type">Set</span>(<span class="type">List</span>())</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            <span class="keyword">for</span> </span><br><span class="line">                queens &lt;- placeQueens(k<span class="number">-1</span>) <span class="comment">// with k-1 queens, the set of solutions</span></span><br><span class="line">                col &lt;- <span class="number">0</span> until n <span class="comment">// the column of the k th queen</span></span><br><span class="line">                <span class="keyword">if</span> isSafe(col, queens) <span class="comment">// safe means a solution</span></span><br><span class="line">            <span class="keyword">yield</span> col::queens</span><br><span class="line">    placeQueens(n)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isSafe</span></span>(col: <span class="type">Int</span>, queens: <span class="type">List</span>[<span class="type">Int</span>]): <span class="type">Boolean</span> = </span><br><span class="line">        !checks(col, <span class="number">1</span>, queens)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">checks</span></span>(col: <span class="type">Int</span>, delta: <span class="type">Int</span>, queens: <span class="type">List</span>[<span class="type">Int</span>]): <span class="type">Boolean</span> = queens <span class="keyword">match</span></span><br><span class="line">        <span class="keyword">case</span> <span class="type">Nil</span> =&gt; <span class="literal">false</span> <span class="comment">// no other queens, no check</span></span><br><span class="line">        <span class="keyword">case</span> qcol::others =&gt;</span><br><span class="line">            qcol == col                     <span class="comment">// same column</span></span><br><span class="line">            || (qcol-col).abs == delta      <span class="comment">// diagonal check</span></span><br><span class="line">            || checks(col, delta+<span class="number">1</span>, others) <span class="comment">// check next queen</span></span><br></pre></td></tr></table></figure>
+<h2 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/v_july_v/article/details/7041827#t10">从头到尾彻底理解KMP</a></p>
 <h2 id="Water-pouring-puzzle"><a href="#Water-pouring-puzzle" class="headerlink" title="Water pouring puzzle"></a>Water pouring puzzle</h2><blockquote>
 </blockquote>
 
