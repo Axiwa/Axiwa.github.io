@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>CS449 notes</title>
+  <meta name="author" content="Axiwa">
+  <meta name="description" content="Silent site">
+  
+  
+  <meta property="og:title" content="CS449 notes"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Azure"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Azure" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        CS449 notes
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2021-05-14T19:13:35.082Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2021-05-14
+</time>
+
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lec-1-Introduction"><span class="toc-text">Lec 1 Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Scale-and-Hyperscale"><span class="toc-text">Scale and Hyperscale</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scaling-up-and-scaling-out"><span class="toc-text">Scaling up and scaling out</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-intensive-applications"><span class="toc-text">Data-intensive applications</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reliability"><span class="toc-text">Reliability</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scalability"><span class="toc-text">Scalability</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clouds"><span class="toc-text">Clouds</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lec-2-Distributed-systems"><span class="toc-text">Lec 2 Distributed systems</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Definition"><span class="toc-text">Definition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Properties"><span class="toc-text">Properties</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Centralized-architecture-client-server"><span class="toc-text">Centralized architecture (client-server)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fully-distributed-architecture-P2P"><span class="toc-text">Fully distributed architecture (P2P)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lec-3-Cloud-Computing"><span class="toc-text">Lec 3 Cloud Computing</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Characteristics"><span class="toc-text">Characteristics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flavours"><span class="toc-text">Flavours</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MapReduce"><span class="toc-text">MapReduce</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h2 id="Lec-1-Introduction"><a href="#Lec-1-Introduction" class="headerlink" title="Lec 1 Introduction"></a>Lec 1 Introduction</h2><h3 id="Scale-and-Hyperscale"><a href="#Scale-and-Hyperscale" class="headerlink" title="Scale and Hyperscale"></a>Scale and Hyperscale</h3><p>The ability of an architecture to scale appropriately as increased demand is added to the system. For a datacenter, scaling means increasing computing ability, memory, networking infrastructure, storage resources.</p>
+<h3 id="Scaling-up-and-scaling-out"><a href="#Scaling-up-and-scaling-out" class="headerlink" title="Scaling up and scaling out"></a>Scaling up and scaling out</h3><p><strong>Scaling up</strong>: More power &amp; resources is added to existing machines, scaling <strong>vertically</strong>. Constant time as resources increase in propotion to increasing data size.</p>
+<p><strong>Scaling out</strong>: Adding more machines to spread out the load, taking advantage of the cumulative capacity of shared resources. Scaling <strong>horizontally</strong>. </p>
+<p><strong>Speed-up:</strong> Proportionally less time as resources increase for a given amount of data.</p>
+<h3 id="Data-intensive-applications"><a href="#Data-intensive-applications" class="headerlink" title="Data-intensive applications"></a>Data-intensive applications</h3><p>Characterized by the fact that they manipulate huge volume of data, potentially complex, changing, increasing, unable to be handled by a single computer and fit in memory.</p>
+<h3 id="Reliability"><a href="#Reliability" class="headerlink" title="Reliability"></a>Reliability</h3><p><strong>Byzantine failures:</strong> Failures that are caused by arbitrary behaviour of some system component and there is imperfect information on whether a component has failed.</p>
+<p><strong>Redundancy:</strong> Achieve system reliability. Backups, checkpointing, RAID, RDD lineage, etc.</p>
+<h3 id="Scalability"><a href="#Scalability" class="headerlink" title="Scalability"></a>Scalability</h3><p><strong>Measure performance:</strong> Latency, response time, average versus percentiles (e.g. 95th), etc.<br><strong>Tail-latency:</strong> A small percentage of responses of a service that takes more time that usual. It still may slow down the entire computation.</p>
+<h3 id="Clouds"><a href="#Clouds" class="headerlink" title="Clouds"></a>Clouds</h3><p><strong>Elasticity:</strong> The ability to automatically adapt the employed resources to varying workload. The typical infrastructure choice for elastic systems is Cloud computing.</p>
+<h2 id="Lec-2-Distributed-systems"><a href="#Lec-2-Distributed-systems" class="headerlink" title="Lec 2 Distributed systems"></a>Lec 2 Distributed systems</h2><h3 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h3><p>A system with multiple components (potentially heterogeneous) located on different machines that communicate and coordinate actions in order to <strong>appear as a single coherent system to the user</strong>. Resources of several machines are aggregated, the system is more scalable, faster, and reliable, more complex (no global clock, unpredictable failures of components, highly variable bandwidth, large latency …).</p>
+<h3 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h3><p>Robustness</p>
+<p>Availability: Are services and data always available to clients?</p>
+<p>Scalability</p>
+<p>Transparency: Be perceived as a whole system rather than a collection: <a target="_blank" rel="noopener" href="https://superuser.com/questions/1263299/what-is-transparency-in-distributed-systems-in-simple-words">https://superuser.com/questions/1263299/what-is-transparency-in-distributed-systems-in-simple-words</a></p>
+<p>Concurrency</p>
+<p>Security</p>
+<p>Efficiency</p>
+<h3 id="Centralized-architecture-client-server"><a href="#Centralized-architecture-client-server" class="headerlink" title="Centralized architecture (client-server)"></a>Centralized architecture (client-server)</h3><p>One entity (the server) has a global view of the system. Example: <strong>Web</strong>. Simple, easier to control. Not reliable, lack of scalability.</p>
+<h3 id="Fully-distributed-architecture-P2P"><a href="#Fully-distributed-architecture-P2P" class="headerlink" title="Fully distributed architecture (P2P)"></a>Fully distributed architecture (P2P)</h3><ul>
+<li><p>All participating entities (nodes) are both clients and servers and contribute the the system they use. There is no central node that has global knowledge of the system.</p>
+</li>
+<li><p><strong>The core: Overlay Networks</strong>: a virtual network abstraction specifying the topology of the P2P system and implemented on top of a physical network. Logical or virtual link between nodes corresponds to a path, perhaps through many physical links.</p>
+</li>
+<li><p>Single point of failure (SPOF) is a part system that if it fails, will stop the entire system from working.</p>
+</li>
+<li><p><strong>Topology</strong>: </p>
+<ul>
+<li>centralized: Every node is connected to other nodes, as well as a central sever</li>
+<li>fully connected: No central entity</li>
+<li>hybrid</li>
+<li>Structured P2P. DHT-Based: Topology strictly determined by node IDs. Not all nodes have complete knowledge of all nodes.</li>
+</ul>
+</li>
+<li><p><strong>Distibuted Hash Table</strong>:</p>
+<ul>
+<li>Autonomy and decentralization</li>
+<li>Fault tolerance</li>
+<li>Scalability<br>Each of nodes maintains a set of links (O(log n)) to other nodes. The stucture of a DHT includes keyspace, keyspace partitioning scheme, overlay network.</li>
+</ul>
+</li>
+</ul>
+<p>The identifier of a node is its ID (for instance, a SHA1 hash of the IP). Each object is assigned a 160-bit long identifier (key). Each node is responsible for a range of keys by specific algorithm.</p>
+<ul>
+<li><p>Self-organization</p>
+</li>
+<li><p><strong>Pastry</strong>:</p>
+<ul>
+<li><p>Each node is assigned a 128-bit long identifier. Place the node and the objects in a ring uniformly at random.</p>
+</li>
+<li><p>Each object is associated to the node whose identifier is the <strong>closest</strong> to the object identifier.</p>
+</li>
+<li><p>Despite concurrent node failures, eventual delivery is guaranteed unless [L/2] nodes with adjacent nodeIds fail simultaneously.</p>
+</li>
+<li><p><strong>Routing</strong></p>
+<ul>
+<li><p>In each routing step, a node normally forwards the message to a node whose nodeId shares with the key a prefix that is at least one digit longer than the prefix that the key shares with the present node’s id.</p>
+</li>
+<li><p><strong>Routing table</strong>: route(key, msg)</p>
+<ul>
+<li>routeTable(i, l): nodeId matching the current node identifier up to level i, with the next digit l (-rest of nodeIds)</li>
+<li>Lazily repaired</li>
+</ul>
+</li>
+<li><p><strong>Leaf set</strong>: 8 or 16 closest numerical neighbors in the naming space. Closest larger and smaller nodeIds. Leaf set is aggressively monitored and fixed.</p>
+</li>
+<li><p><strong>Neighborhood Set</strong>: contains the nodeIds and IP addresses of the M nodes that are closest to the local node (according to the <strong>proximity metric</strong>).</p>
+</li>
+<li><p>Algorithm on node A:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">IF (D i s wihin range of leaf set)</span><br><span class="line">  DONE</span><br><span class="line">ELSE</span><br><span class="line">  check in the routing table</span><br><span class="line">  IF (there is entry in the routing table, which shares the longer prefix with D than current node)</span><br><span class="line">    msg is forwarded to that node</span><br><span class="line">ELSE</span><br><span class="line">  msg is forwarded to a node hsaring a prefix with the key at least as long as the local node, and is numerically closer to the key.</span><br></pre></td></tr></table></figure>
+<p>This procedure always converges.</p>
+</li>
+<li><p><strong>Initialization</strong> of the routing table</p>
+<ul>
+<li>You have a node A to start from, which is already part of the system. The new nodeId is X. X asks A to route a special “join” message with the key equal to X, and Pastry routes the join message to the existing node Z whose id is numerically closest to X. All nodes along this path from A to Z send their state table to X. X inspects this information and initializes its own state tables, then informs any nodes that need to be aware of its arrival.</li>
+<li>A is assumed to be in proximity to the new node X, A’s neighborhood set to initialize X’s neighborhood set. Z has the closest existing nodeId to X, thus its leaf set is the basis for X’s leaf set.</li>
+<li>Consider the condition where A and X share no common prefix. Then row 0 of A’s routing table (A0) contains the appropriate value for X0, row 1 of B’s (B is the first node encountered from A to Z) routing table is appropriate for X1, C2 is appropriate entries for X2, and so on.</li>
+<li>Total cost is $O(log_{2^b}N)$</li>
+</ul>
+</li>
+<li><p><strong>Departure</strong></p>
+<ul>
+<li>Failure or explicit departure</li>
+<li>Nodes may fail or depart without warning. The failure of a node can be detected by another node that attempts to contact it during routing and there is no response. This may not affect the routing of a message, but a replacement entry must be found to preserve the routing table.</li>
+<li>A node attempts to contact each member of the neighborhood set periodically to see if it is still alive.</li>
+</ul>
+</li>
+<li><p><strong>Locolity</strong>: Reducing latency</p>
+<ul>
+<li>Filling the routing table whenever possible with nodes that are close geographically and satisfying the constraints of the routing table. (Populating the routing table)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Lec-3-Cloud-Computing"><a href="#Lec-3-Cloud-Computing" class="headerlink" title="Lec 3 Cloud Computing"></a>Lec 3 Cloud Computing</h2><h3 id="Characteristics"><a href="#Characteristics" class="headerlink" title="Characteristics"></a>Characteristics</h3><p>On-demand service</p>
+<p>Ubiquitous network access</p>
+<p>Location transparent resource polling</p>
+<p>Rapid Elasticity</p>
+<p>Measured service with pay per use</p>
+<p>(Massive scal; Data-intensive; New programming paradigms…)</p>
+<h3 id="Flavours"><a href="#Flavours" class="headerlink" title="Flavours"></a>Flavours</h3><p>Hardware as a service: your own cluster</p>
+<p>Infrastructure as a service: flexible computing and storage infrastructure in the cloud. IaaS is fully self-service for accessing and monitoring computers, networking, storage, and other services. <a target="_blank" rel="noopener" href="https://avinetworks.com/glossary/infrastructure-as-a-service-iaas/">https://avinetworks.com/glossary/infrastructure-as-a-service-iaas/</a></p>
+<p>Platform as a service: provide cloud components to certain software while being used mainly for applications. All servers, storage, and networking can be managed by the enterprise or a third-party provider while the developers can maintain management of the applications.</p>
+<p>Software as a service: SaaS utilizes the internet to deliver applications, which are managed by a third-party vendor, to its users. </p>
+<h3 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h3>
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © Azure 2020-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
