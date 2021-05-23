@@ -50,12 +50,12 @@
 
     </div>
     <div class="meta center">
-      <time datetime="2021-05-19T21:04:28.193Z" itemprop="datePublished">
+      <time datetime="2021-05-23T17:48:27.795Z" itemprop="datePublished">
   <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
   </svg>
   &nbsp;
-  2021-05-19
+  2021-05-23
 </time>
 
 
@@ -609,6 +609,7 @@
 <li>Partitions of a topic are replicated: fault-tolerent<ul>
 <li>One broker is the leader of one partition. Read and write go through the leader</li>
 <li>Zookeeper manages consistency: 1) detecting the addition and the removal of brokers and consumers; 2) Keeping trak of the comsumed offset of each partition </li>
+<li>Followers passively replicate the leader for fault tolerance. Once a leader fails, one of the followers will assume the role of the leader</li>
 </ul>
 </li>
 <li>State and guarantees<ul>
@@ -616,6 +617,7 @@
 <li>Consumers are responsible for keeping track of offsets</li>
 <li>Messages in queues expire based on the pre-configured time periods</li>
 <li>Kafka guarantees that messages from a single partition are delivered to a consumer in order  </li>
+<li>Kafka only guarantees at-least-once delivery (the client needs to check for duplicate)</li>
 </ul>
 </li>
 </ul>
@@ -628,10 +630,10 @@
 </li>
 <li>Windowing<ul>
 <li>Window is a buffer associated with an input port to retain previously received tuples</li>
-<li>Tumbling window: fixed length, every event belongs to <strong>one window</strong></li>
+<li>Tumbling window: fixed length, every event belongs to <strong>excatly one window</strong> (no-overlapping), based on the happening time.</li>
 <li>Hopping window: fixed length, allowing overlap</li>
 <li>Sliding window: supports incremental operation, contains all events that occur within some interval and remove old events when they expire.</li>
-<li>Session window: No fixed duration. Grouping together all events from the same user that occur closely in time. Frequently used for web site analysis</li>
+<li>Session window: No fixed duration. Grouping together all events from the same user that occur closely in time. Frequently used for web site analysis (e.g. the clicks of a user in some Web page)</li>
 <li>Windowing by processing time/event time (handling out-of-order events)</li>
 </ul>
 </li>
@@ -669,26 +671,20 @@
 </li>
 </ul>
 <h3 id="Distributed-Gradient-Descent"><a href="#Distributed-Gradient-Descent" class="headerlink" title="Distributed Gradient Descent"></a>Distributed Gradient Descent</h3><ul>
-<li><p>Workers get the assigned training data</p>
-</li>
-<li><p>Workers <strong>pull</strong> the working set of model</p>
-</li>
-<li><p>Different parts of the model may be on different servers</p>
-</li>
-<li><p>Iterate until Stop:</p>
-<ul>
+<li>Workers get the assigned training data</li>
+<li>Workers <strong>pull</strong> the working set of model</li>
+<li>Different parts of the model may be on different servers</li>
+<li>Iterate until Stop:<ul>
 <li>Workers <strong>compute</strong> gradients</li>
 <li>Workers <strong>push</strong> gradients</li>
 <li>Servers <strong>aggregate</strong> into current model</li>
 <li>Workers <strong>pull</strong> updated model</li>
 </ul>
 </li>
-<li><p><img src="/images/cs449-3.png"></p>
-</li>
-<li><p>Idealy, different workers follow the distribution of the data, as homogeneous as possible. But this will slow down the system</p>
-<h3 id="Shared-parameters-key-value-vectors"><a href="#Shared-parameters-key-value-vectors" class="headerlink" title="Shared parameters: key-value vectors"></a>Shared parameters: key-value vectors</h3><p>Model parameters are represented as key-value pairs, but the semantics used by the server may be of vector or matrix. This enables to linear algebra operation and data locality.</p>
-</li>
+<li><img src="/images/cs449-3.png"></li>
+<li>Idealy, different workers follow the distribution of the data, as homogeneous as possible. But this will slow down the system</li>
 </ul>
+<h3 id="Shared-parameters-key-value-vectors"><a href="#Shared-parameters-key-value-vectors" class="headerlink" title="Shared parameters: key-value vectors"></a>Shared parameters: key-value vectors</h3><p>Model parameters are represented as key-value pairs (i, wi), but the semantics used by the server may be of vector or matrix. This enables to linear algebra operation and data locality.</p>
 <h3 id="Range-Push-and-Pull"><a href="#Range-Push-and-Pull" class="headerlink" title="Range Push and Pull"></a>Range Push and Pull</h3><p>Caller of the push and pull are always the workers. Range of keys can minimize network traffic. Non blocking operations: the caller inserts its requests in a queue and resume computation</p>
 <h3 id="Asynchronous-execution-and-Flexible-consistency-model"><a href="#Asynchronous-execution-and-Flexible-consistency-model" class="headerlink" title="Asynchronous execution and Flexible consistency model"></a>Asynchronous execution and Flexible consistency model</h3><p>How to deal with inconsistency? <strong>Stale synchronous parallel (SSP)</strong></p>
 <ul>
