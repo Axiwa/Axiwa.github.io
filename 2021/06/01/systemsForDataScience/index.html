@@ -50,12 +50,12 @@
 
     </div>
     <div class="meta center">
-      <time datetime="2021-05-29T06:29:53.813Z" itemprop="datePublished">
+      <time datetime="2021-06-01T08:01:42.671Z" itemprop="datePublished">
   <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
   </svg>
   &nbsp;
-  2021-05-29
+  2021-06-01
 </time>
 
 
@@ -257,14 +257,14 @@
 </li>
 <li><strong>Data exchange</strong><ul>
 <li><code>viewPropagation()</code> function decides how nodes exchange their membership information, whether push/pull/push-pull</li>
-<li><code>viewselection(c, buffer)</code> how view selection is performed. select the information to exchange during the gossip operation. </li>
+<li><code>viewselection(c, buffer)</code> how view selection is performed. Select the information to exchange during the gossip operation. </li>
 <li><code>buffer(h)</code>  [nodeIP, age] of neighbors and self. (Ignore the oldest h, c/2 first entries of the local view…)</li>
 </ul>
 </li>
 <li><strong>Data processing</strong><ul>
 <li>Once a node receives a buffer, the buffer is appended to its local view</li>
 <li>Which entries and how many entries to be removed (h oldest) and kept (freshest)</li>
-<li>s first items are removed: minimizing th ecorrelation between the local views of the nodes</li>
+<li>s first items are removed: minimizing the correlation between the local views of the nodes</li>
 <li>Random nodes may be removed</li>
 <li>Strategies are determined by h (healer) and s(shuffle): random/healer/shuffle…</li>
 </ul>
@@ -284,7 +284,9 @@
 <li>Locality can be exploited by: caching the data/prefetching/sequential access/patrtitioning the data among nodes. Some data structure are more appropriate than others to exploit locality</li>
 <li>Partitioning is not applicable everywhere, e.g. graph (the smaller the cut, the better. Random graphs is resilient to parition)</li>
 <li><strong>Consistency model</strong> describes the consistency contract between an application and a storage system. We need conistency model because there is data replicated.</li>
-<li><strong>Schedules</strong>: serial schedule/equivalent schedule/serializable schedule…<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/types-of-schedules-in-dbms/">https://www.geeksforgeeks.org/types-of-schedules-in-dbms/</a><h3 id="Strict-consistency"><a href="#Strict-consistency" class="headerlink" title="Strict consistency"></a>Strict consistency</h3></li>
+<li><strong>Schedules</strong>: serial schedule/equivalent schedule/serializable schedule…<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/types-of-schedules-in-dbms/">https://www.geeksforgeeks.org/types-of-schedules-in-dbms/</a></li>
+</ul>
+<h3 id="Strict-consistency"><a href="#Strict-consistency" class="headerlink" title="Strict consistency"></a>Strict consistency</h3><ul>
 <li>Any read on a data item X returns a value corresponding to the result of the most recent write on X.</li>
 </ul>
 <h3 id="Strong-consistency-Linearizability-Sequential-consistency"><a href="#Strong-consistency-Linearizability-Sequential-consistency" class="headerlink" title="Strong consistency(Linearizability, Sequential consistency)"></a>Strong consistency(Linearizability, Sequential consistency)</h3><ul>
@@ -331,7 +333,7 @@
 <li>Quorum: a number of nodes (&gt;50%) that contain replicas of a given key-value pair.</li>
 <li>Each client should acquire the permission of multiple servers before reading or writing a replicated data.</li>
 <li>N: total replicas; R: read quorum; W: write quorum; </li>
-<li>** **: 1. R+W&gt;N 2. W&gt;N/2: At least some node knows everything!</li>
+<li><strong>Constraint</strong>: 1. R+W&gt;N 2. W&gt;N/2: Precluding concurrent write or write/read of two quorums</li>
 <li>After the agreement, changes are applied on the file and <em>a new version number</em> is assigned to the updated file</li>
 <li>Constraint 1 guarantees that a replica will not be read and written at the same time. Constraint 2 guarantees that a replica will no be written by 2 process at the same time.</li>
 <li>(W=N, R=1) is good for read-heavy workloads. (W=1, R=N)/(w=N/2+1, R=N/2+1)</li>
@@ -376,7 +378,7 @@
 </ol>
 <h3 id="ACID-guarantees"><a href="#ACID-guarantees" class="headerlink" title="ACID guarantees"></a>ACID guarantees</h3><ul>
 <li>Atomicity: all included statements in a trasaction are either executed or the whole transaction is aborted without affecting the database</li>
-<li>Consistency: a database is in a consistent state before and after a trasation</li>
+<li>Consistency: a database is in a consistent state before and after a transaction</li>
 <li>Isolation: transactions can not see uncommited changes in the database</li>
 <li>Durability: Changes are written to the disk before a database commits a transaction, so that committed data will not be lost through power failure</li>
 </ul>
@@ -426,9 +428,9 @@
 <li>Supercolumn: column within a column</li>
 <li>Column families: columns are grouped together into sets called column families. There are super column families and simple column families</li>
 <li>Any column within a column family is accessed by “column_familiy -&gt; column” and any column within a super column family can be accessed by “column_family -&gt; super_column -&gt; column”</li>
-<li>Keyspace: A namespace defines data replication on nodes. A cluster contains one keyspace per node<h3 id="Cassandra-Architecture"><a href="#Cassandra-Architecture" class="headerlink" title="Cassandra Architecture"></a>Cassandra Architecture</h3></li>
+<li>Keyspace: A namespace defines data replication on nodes. A cluster contains one keyspace per node</li>
 </ul>
-</li>
+<h3 id="Cassandra-Architecture"><a href="#Cassandra-Architecture" class="headerlink" title="Cassandra Architecture"></a>Cassandra Architecture</h3></li>
 <li><p><strong>Partitioning</strong></p>
 <ul>
 <li>All nodes participate in a cluster. They do not share anything</li>
@@ -521,7 +523,7 @@
 <li>Nodes keep a heartbeat count for each member and periodically gossip their membership list to neighbours, and then update it: Consistency of node network.</li>
 <li><strong>Failure detection</strong>: <ul>
 <li>A mechanism by which a node can locally determine if any other node in the system is up or down. In Cassandra, also used to avoid attempts to communicate with unreachable nodes.</li>
-<li>A modified version of the $\Theta$ Accrual Failure Detector: emits a value indicating the suspicion level whether the monitored node is down.</li>
+<li>A modified version of the $\Theta$ Accrual Failure Detector: emits a value indicating the suspicion level whether the monitored node is down. PHI determines the detection timeout.</li>
 <li>Adaptively set the timeout based on underlying network, historical inter-arrival time and failure behavior</li>
 </ul>
 </li>
@@ -578,7 +580,7 @@
 <li><strong>Publisher</strong>: generate event data and publishes them</li>
 <li><strong>Subscriber</strong>: submit their subscriptions and process the events received</li>
 <li><strong>P/S service</strong>: the mediator/broker that filters and routes events from publishers to interested subscribers</li>
-<li>Decoupling in time, space and synchronizatino</li>
+<li>Decoupling in time, space and synchronization</li>
 <li>Centralized architecture: one centralized broker, subscribers/publishers do not need to know each other</li>
 <li>Distributed architecture: a set of nodes act as brokers</li>
 <li>Decentralized architecture: each node can be pub/sub/broker, communicating directly, they should have knowledge of each other</li>
@@ -625,7 +627,7 @@
 </li>
 </ul>
 <h3 id="Streaming-Data"><a href="#Streaming-Data" class="headerlink" title="Streaming Data"></a>Streaming Data</h3><ul>
-<li>Processing parrerns<ul>
+<li>Processing patterns<ul>
 <li>Batch processing</li>
 <li>Micro-batch: set of bounded data from unbounded data</li>
 <li>Continuous procesing-based system </li>
