@@ -50,7 +50,7 @@
 
     </div>
     <div class="meta center">
-      <time datetime="2021-06-12T18:33:53.695Z" itemprop="datePublished">
+      <time datetime="2021-06-12T20:57:50.517Z" itemprop="datePublished">
   <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
   </svg>
@@ -66,7 +66,7 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E7%BD%91%E7%BB%9C"><span class="toc-text">重启网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vim"><span class="toc-text">vim</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VScode"><span class="toc-text">VScode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tex"><span class="toc-text">Tex</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C"><span class="toc-text">C++</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Vector"><span class="toc-text">Vector</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E7%BD%91%E7%BB%9C"><span class="toc-text">重启网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vim"><span class="toc-text">vim</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VScode"><span class="toc-text">VScode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tex"><span class="toc-text">Tex</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C"><span class="toc-text">C++</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Vector"><span class="toc-text">Vector</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CUDA"><span class="toc-text">CUDA</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
@@ -97,6 +97,10 @@
 <p>Thus, the pointer <code>a</code> = &amp;v[0], and you lose the address allocated to <code>a</code> before. Why did I just find this problem?? Because I was using <code>cudaMallocManaged</code></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> * a;</span><br><span class="line">cudaMallocManaged(&amp;a, m_n * <span class="keyword">sizeof</span>(<span class="keyword">double</span>));</span><br><span class="line"><span class="built_in">std</span>::copy(v.begin(), v.end(), a);</span><br></pre></td></tr></table></figure>
 <p>After allocating the memory to <code>a</code> using Unified Memory system, if I use <code>a = v.data()</code>, it is lost!</p>
+<h4 id="CUDA"><a href="#CUDA" class="headerlink" title="CUDA"></a>CUDA</h4><p>When I declared an array in cuda kernel like this:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">int</span> thread_id = blockDim.x * blockIdx.x + threadIdx.x;</span><br><span class="line">    <span class="keyword">double</span> * shared = <span class="keyword">new</span> <span class="keyword">double</span>[nonzero];</span><br><span class="line">    <span class="keyword">if</span> (thread_id &lt; nonzero)&#123;</span><br><span class="line">      shared[thread_id] = x[col[thread_id]]*value[thread_id]; </span><br><span class="line">      atomicAdd(&amp;Ap[row[thread_id]], shared[thread_id]);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>After several calls to the kernel, it will crash. It is indeed awful code, but I don’t know it is fatally wrong. I kept <code>shared</code> because I wanted to try for shared memory later and remove atomic operation.</p>
+<p>(I DON’T KNOW WHY I AM ALWAYS WASTING TIME ON THE STUPID, UNNECESSARY MISTAKES!)</p>
 
 
   </article>
