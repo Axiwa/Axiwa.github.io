@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>刷题</title>
+  <meta name="author" content="Axiwa">
+  <meta name="description" content="Silent site">
+  
+  
+  <meta property="og:title" content="刷题"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Azure"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Azure" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        刷题
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2021-07-16T13:26:02.033Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2021-07-16
+</time>
+
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E6%B3%95"><span class="toc-text">二分法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88"><span class="toc-text">双指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="toc-text">滑动窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5"><span class="toc-text">旋转矩阵</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C"><span class="toc-text">C++</span></a>
+    
+    <div class="picture-container">
+      
+    </div>
+    <p>正在从<a target="_blank" rel="noopener" href="https://github.com/youngyangyang04/leetcode-master">https://github.com/youngyangyang04/leetcode-master</a>开始刷题！</p>
+<h3 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h3><p>Leetcode: 34, 35, 69, 367, 704</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [left, right]</span></span><br><span class="line"><span class="keyword">while</span> (left &lt;= right)&#123;</span><br><span class="line">  <span class="keyword">int</span> mid = left + (right-left)/<span class="number">2</span>; </span><br><span class="line">  <span class="keyword">if</span> (nums[mid] &lt; target) left = mid+<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) right = mid<span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> mid;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// [left, right)</span></span><br><span class="line"><span class="keyword">while</span> (left &lt; right)&#123;</span><br><span class="line">  <span class="keyword">int</span> mid = left + (right-left)/<span class="number">2</span>; </span><br><span class="line">  <span class="keyword">if</span> (nums[mid] &lt; target) left = mid+<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) right = mid<span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> mid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>34题，第一个和最后一个位置，分别找第一个nums[left]&gt;=target和nums[right]&gt;target的索引，每一次满足要求，记录下该位置．两个值分别求</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (left&lt;=right)&#123;</span><br><span class="line">  <span class="keyword">int</span> mid = left+(right-left)/<span class="number">2</span>;</span><br><span class="line">  <span class="keyword">if</span> (nums[mid]&gt;=target)</span><br><span class="line">    from = mid;</span><br><span class="line">    left = mid+<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">else</span> </span><br><span class="line">    to = mid - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>69/367<br>找平方根．牛顿法</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> t = <span class="number">1.0</span></span><br><span class="line">t = (t+x/x)/<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>二分法，记得用long</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (num&lt;<span class="number">2</span>) </span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">  <span class="keyword">long</span> left = <span class="number">2</span>, right = num/<span class="number">2</span>;</span><br><span class="line">  <span class="keyword">while</span> (left&lt;=right)&#123;</span><br><span class="line">  <span class="keyword">int</span> mid = left + (right-left)/<span class="number">2</span>; </span><br><span class="line">  <span class="keyword">if</span> (mid*mid &lt; num) left = mid+<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (mid*mid &gt; num) right = mid<span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">else</span> ...;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>Leetcode: </p>
+<p>27.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-element/">移除元素</a></p>
+<p>左边的指针从0开始，右边的指针从nums.size()-1开始．</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (left &lt;= right)&#123;</span><br><span class="line">  <span class="keyword">if</span> (nums[left] == target)&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums[right] != target)&#123;</span><br><span class="line">      nums[left] = nums[right];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">      right--;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    left++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>26.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array">删除重复项</a></p>
+<p>区别空数组和非空; 非空的<code>right</code>从１开始，<code>left</code>从０开始</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (right &lt; nums.size())&#123;</span><br><span class="line">  <span class="keyword">if</span> (nums[right] != nums[left])&#123;</span><br><span class="line">    left = left+<span class="number">1</span>;</span><br><span class="line">    nums[left] = nums[right];</span><br><span class="line">  &#125;</span><br><span class="line">  right++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>80.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/">删除重复项II</a></p>
+<p>若可以保留k个重复项，区别数组长度&lt;=k和&gt;k; <code>left</code>和<code>right</code>下标都从k开始. 如果<code>nums[left-k]!=nums[right]</code>，说明<code>nums[left]</code>应该被<code>nums[right]</code>替换，否则增加<code>right</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> left = k; <span class="keyword">int</span> right = k;</span><br><span class="line"><span class="keyword">while</span> (right &lt; nums.size())&#123;</span><br><span class="line">  <span class="keyword">if</span> (nums[right] != nums[left-k])&#123;</span><br><span class="line">    nums[left] = nums[right];</span><br><span class="line">    left++;</span><br><span class="line">  &#125;</span><br><span class="line">  right++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>844.<a target="_blank" rel="noopener" href="https://leetcode.com/problems/backspace-string-compare/">Backspace String Compare</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/container-with-most-water">https://leetcode.com/problems/container-with-most-water</a></p>
+<p>3Sum/3Sum2/4Sum…先排序，最后一层循环用双指针</p>
+<p>142.<a target="_blank" rel="noopener" href="https://github.com/youngyangyang04/leetcode-master/blob/master/problems/0142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II.md">环形链表II</a></p>
+<h3 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h3><p>209.<a target="_blank" rel="noopener" href="https://leetcode.com/problems/minimum-size-subarray-sum/">Minimum Size Subarray Sum</a></p>
+<p>76.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-window-substring/">最小覆盖子串</a></p>
+<p>用map记录需要满足的字母和相应个数，用<code>satisfied</code>记录满足的字母总数，      <code>satisfied</code>满足时左指针右移至不再满足，记录满足的最小长度，<code>satisfied</code>不满足时右指针右移直到满足．一旦更改记录的<code>table</code>，检查相应元素的个数是否刚好满足/刚好不满足(<code>table[nums[left]] == 1 or table[nums[right]] == 0</code>)来改变对应的<code>satisfied</code></p>
+<h3 id="旋转矩阵"><a href="#旋转矩阵" class="headerlink" title="旋转矩阵"></a>旋转矩阵</h3><h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><ol>
+<li>创建二维数组<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; matrix(n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(m, <span class="number">0</span>));</span><br><span class="line"><span class="comment">// matrix.size() = n</span></span><br></pre></td></tr></table></figure></li>
+<li>map<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">m[<span class="string">&#x27;a&#x27;</span>] = <span class="number">1</span>;</span><br><span class="line">m[<span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line"><span class="comment">//可以直接用</span></span><br><span class="line"><span class="comment">//不希望存在的key，不要用m[key]，用m.find(key) == m.end()．否则会被创建出来！</span></span><br></pre></td></tr></table></figure></li>
+<li>定义链表<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">  <span class="keyword">int</span> val;</span><br><span class="line">  ListNode *next;</span><br><span class="line">  ListNode() : val(<span class="number">0</span>), next(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">  ListNode(<span class="keyword">int</span> x): val(x), next(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">  ListNode(<span class="keyword">int</span> x, ListNode *next): val(x), next(next) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>Hash<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">set</span></span><br><span class="line"><span class="built_in">set</span>::<span class="built_in">multiset</span></span><br><span class="line"><span class="comment">//红黑树.查询和增减效率O(logn)</span></span><br><span class="line"><span class="built_in">set</span>::<span class="built_in">unordered_set</span> <span class="comment">//哈希表．查询和增减效率O(1)</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © Azure 2020-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
