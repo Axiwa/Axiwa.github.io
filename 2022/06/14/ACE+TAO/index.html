@@ -50,12 +50,12 @@
 
     </div>
     <div class="meta center">
-      <time datetime="2022-06-13T20:46:46.478Z" itemprop="datePublished">
+      <time datetime="2022-06-14T14:14:35.462Z" itemprop="datePublished">
   <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
   </svg>
   &nbsp;
-  2022-06-13
+  2022-06-14
 </time>
 
 
@@ -80,16 +80,16 @@
     <div class="picture-container">
       
     </div>
-    <p>过程又臭又长，以至于必须单独写一篇== <span id="more"></span></p>
+    <p>为什么，为什么会变成这样呢... <span id="more"></span></p>
 <p>我需要用OpenDDS进行实时的数据处理，使用前要benchmark一下，因此想用自带的performance-tests</p>
 <p>系统 Ubuntu 20.04</p>
 <p>OpenDDS-3.20</p>
 <p>ACE+TAO-7.0.7</p>
 <p><strong>官网：</strong></p>
 <p>最简安装，不需要自己下载编译ACE+TAO，不指定任何configure option。简而言之：下载，解压，进入解压的OpenDDS目录，<code>./configure</code>，<code>make</code>，<code>source setenv.sh</code> 设置环境，测试，成功！</p>
-<p>https://opendds.org/quickstart/GettingStartedLinux.html</p>
+<p><a target="_blank" rel="noopener" href="https://opendds.org/quickstart/GettingStartedLinux.html">https://opendds.org/quickstart/GettingStartedLinux.html</a></p>
 <p>官方Github的文档，告诉你需要什么feature都告诉configure。比如java支持啊，需要自带tests啊，实际的参数都请去相应的文档查阅</p>
-<p>https://github.com/objectcomputing/OpenDDS/blob/master/INSTALL.md</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/objectcomputing/OpenDDS/blob/master/INSTALL.md">https://github.com/objectcomputing/OpenDDS/blob/master/INSTALL.md</a></p>
 <hr />
 <p>Make life easier:</p>
 <p>configure支持的输入用 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --<span class="built_in">help</span></span><br></pre></td></tr></table></figure> CXX标准似乎默认是std=c++11，不放心也可以加上<code>--std=c++11</code></p>
@@ -105,6 +105,7 @@
 <p>自己怎么指定CXX？ To be continued...</p>
 <p><strong>运行测试</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$DDS_ROOT</span>/tests</span><br><span class="line">./auto_run_tests.pl </span><br></pre></td></tr></table></figure> test PASSED真是无论何时都那么令人心旷神怡啊</p>
 <p><strong>性能测试</strong></p>
+<p><a target="_blank" rel="noopener" href="https://opendds.readthedocs.io/en/latest/internal/bench2.html">https://opendds.readthedocs.io/en/latest/internal/bench2.html</a></p>
 
 
   </article>
