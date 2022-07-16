@@ -75,7 +75,7 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#motivation"><span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#feature-1-3d-mesh-design"><span class="toc-text">Feature 1 3D Mesh Design</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#feature-2-textures"><span class="toc-text">Feature 2 Textures</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#feature-3-homogeneous-media"><span class="toc-text">Feature 3 Homogeneous media</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#feature-4-object-instancing"><span class="toc-text">Feature 4 Object instancing</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="toc-text">碎碎念</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#motivation"><span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#final-render"><span class="toc-text">Final Render</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#feature-1-3d-mesh-design"><span class="toc-text">Feature 1 3D Mesh Design</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#feature-2-textures"><span class="toc-text">Feature 2 Textures</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#feature-3-homogeneous-media"><span class="toc-text">Feature 3 Homogeneous media</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#feature-4-object-instancing"><span class="toc-text">Feature 4 Object instancing</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="toc-text">碎碎念</span></a></li></ol>
     
     <div class="picture-container">
       
@@ -91,6 +91,8 @@
 <p><em>Tales from the Loop</em> by Simon Stalenhag</p>
 <p><img src="/images/sky.png" /></p>
 <p><em>Castle in the Sky</em> by Tokuma Shoten</p>
+<h1 id="final-render">Final Render</h1>
+<p><img src="/images/final.png" /></p>
 <h1 id="feature-1-3d-mesh-design">Feature 1 3D Mesh Design</h1>
 <p><strong>Description</strong></p>
 <p>I used the image from animation to model 3D meshes in Blender and gave them a pose. The mesh that I modeled are the robot and grass, and a tree that is used to generate god ray but not presents in the scene.</p>
@@ -155,7 +157,7 @@ L(\mathbf{x}, \vec{\omega}) &amp;=T_{r}\left(\mathbf{x}, \mathbf{x}_{z}\right) L
 <ol start="2" type="1">
 <li>God ray test</li>
 </ol>
-<p>The left is the scene rendered by Blender <code>cycles</code>. Both renderer uses 1024 samples/pixel. There are still some problems regarding how to determine what kind of interaction is, so the wall cannot be too close to the volume. The difference may be because the parameters are different.</p>
+<p>The upper is the scene rendered by Blender <code>cycles</code>. Both renderer uses 1024 samples/pixel. There are still some problems regarding how to determine what kind of interaction is, so the wall cannot be too close to the volume. The difference may be because the parameters are different.</p>
 <p><img src="/images/room_ref.png" /><img src="/images/room.png" /></p>
 <ol start="3" type="1">
 <li>Numerical validation?</li>
