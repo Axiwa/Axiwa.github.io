@@ -121,11 +121,11 @@
             <ul class="archive-list">
                 <div class="archive-item">
                     <div class="archive-time">
-                      06-14
+                      07-02
                     </div>
                     <div class="archive-detail">
-                      <a href="/2022/06/14/ACE+TAO/" class="archive-link">
-                        ACE+TAO+OpenDDS安装
+                      <a href="/2022/07/02/remember%20sth/" class="archive-link">
+                        My stackoverflow
                       </a>
                     </div>
                 </div>
@@ -137,11 +137,11 @@
       
                 <div class="archive-item">
                     <div class="archive-time">
-                      03-31
+                      06-14
                     </div>
                     <div class="archive-detail">
-                      <a href="/2022/03/31/remember%20sth/" class="archive-link">
-                        My stackoverflow
+                      <a href="/2022/06/14/ACE+TAO/" class="archive-link">
+                        ACE+TAO+OpenDDS安装
                       </a>
                     </div>
                 </div>
@@ -195,5 +195,20 @@ searchFunc(path, 'local-search-input', 'local-search-result');
 
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

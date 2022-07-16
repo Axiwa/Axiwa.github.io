@@ -99,7 +99,7 @@
   2022
 </h1>
 <div class="archive-num">
-  There are 4 articles in total
+  There are 5 articles in total
 </div>
 <div class="archive">
   
@@ -123,13 +123,29 @@
                       02-04
                     </div>
                     <div class="archive-detail">
+                      <a href="/2022/02/04/How-to-create-a-blog/" class="archive-link">
+                        How to create a blog by hexo&amp;github
+                      </a>
+                    </div>
+                </div>
+                <hr>
+                
+    
+      
+
+      
+                <div class="archive-item">
+                    <div class="archive-time">
+                      02-04
+                    </div>
+                    <div class="archive-detail">
                       <a href="/2022/02/04/scalaReview/" class="archive-link">
                         Scala notes
                       </a>
                     </div>
                 </div>
                 <hr>
-                
+      
     
       
 
@@ -226,5 +242,20 @@ searchFunc(path, 'local-search-input', 'local-search-result');
 
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
