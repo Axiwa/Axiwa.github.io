@@ -4,6 +4,23 @@
   
     
     <entry>
+      <title>碎碎念</title>
+      <link href="/2022/07/18/diary/"/>
+      <url>/2022/07/18/diary/</url>
+      
+      
+      <categories>
+          
+          <category> 废话 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CS440 Rendering Engine</title>
       <link href="/2022/07/16/cs440/"/>
       <url>/2022/07/16/cs440/</url>
@@ -29,23 +46,6 @@
       <categories>
           
           <category> Debug </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>碎碎念</title>
-      <link href="/2022/06/14/diary/"/>
-      <url>/2022/06/14/diary/</url>
-      
-      
-      <categories>
-          
-          <category> 废话 </category>
           
       </categories>
       
