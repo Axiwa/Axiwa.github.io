@@ -75,12 +75,94 @@
     </div>
     <hr>
     
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lu-decomposition"><span class="toc-text">LU decomposition</span></a></li></ol>
     
     <div class="picture-container">
       
     </div>
-    
+    <p>花式解决<span class="math inline">\(Ax = b\)</span> <span id="more"></span></p>
+<h2 id="lu-decomposition">LU decomposition</h2>
+<p>Suppose we have a set of linear equations: <span class="math display">\[
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; .. &amp; .. \\
+.. &amp;  &amp;  &amp;  \\
+ &amp;  &amp;  &amp; a_{nn} \\
+\end{bmatrix}\begin{bmatrix}
+ x_1\\
+ x_2\\
+ ..\\
+x_n
+\end{bmatrix}
+= \begin{bmatrix}
+ b_1\\
+ b_2\\
+ ..\\
+b_n
+\end{bmatrix}
+\]</span></p>
+<p>The most brute force way is to eliminate one variable each row from top to bottom, and then plug in the sovled variable to previous ones from bottom to top. It is something like this:</p>
+<p>Step 1: Let each row except 1st do not contain <span class="math inline">\(x_1\)</span>. Then eliminate <span class="math inline">\(x_2\)</span> in each row except 1st and 2nd</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\
+0 &amp; a_{22}-a_{12}\frac{a_{21}}{a_{11}} &amp; .. &amp; .. \\
+.. &amp;  &amp;  &amp;  \\
+0 &amp;  &amp;  &amp; a_{nn}-a_{1n}\frac{a_{n1}}{a_{11}} \\
+\end{bmatrix}\begin{bmatrix}
+ x_1\\
+ x_2\\
+ ..\\
+x_n
+\end{bmatrix}
+= \begin{bmatrix}
+ b_1\\
+ b_2-b_1\frac{a_{21}}{a_{11}}\\
+ ..\\
+b_n-b_1\frac{a_{n1}}{a_{11}}
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\
+0 &amp; a_{22}-a_{12}\frac{a_{21}}{a_{11}} &amp; .. &amp; .. \\
+0 &amp; 0 &amp; a_{33}-a_{13}\frac{a_{31}}{a_{11}}-(a_{23}-a_{13}\frac{a_{21}}{a_{11}})\frac{a_{32}-a_{12}\frac{a_{31}}{a_{11}}}{a_{22}-a_{12}\frac{a_{21}}{a_{11}}} &amp;  \\
+.. &amp; .. &amp;  &amp;  \\
+0 &amp; 0 &amp;  &amp; a_{nn}-a_{1n}\frac{a_{n1}}{a_{11}}-(a_{2n}-a_{1n}\frac{a_{21}}{a_{11}})\frac{a_{n2}-a_{12}\frac{a_{n1}}{a_{11}}}{a_{22}-a_{12}\frac{a_{21}}{a_{11}}} \\
+\end{bmatrix}\begin{bmatrix}
+ x_1\\
+ x_2\\
+ ..\\
+x_n
+\end{bmatrix}
+= \begin{bmatrix}
+ b_1\\
+ b_2-b_1\frac{a_{21}}{a_{11}}\\
+ ..\\
+b_n-b_1\frac{a_{n1}}{a_{11}}-(b_2-b_1\frac{a_{21}}{a_{11}})\frac{a_{n2}-a_{12}\frac{a_{n1}}{a_{11}}}{a_{22}-a_{12}\frac{a_{21}}{a_{11}}}
+\end{bmatrix}
+\]</span></p>
+<p>If every time the denominator is not zero, finally we will get an upper matrix <span class="math display">\[
+\begin{bmatrix}
+u_{11} &amp; u_{12} &amp; .. &amp; u_{1n} \\
+0 &amp; u_{22} &amp; .. &amp; .. \\
+.. &amp;  &amp;  &amp;  \\
+0 &amp;  &amp;  &amp; u_{nn} \\
+\end{bmatrix}\begin{bmatrix}
+ x_1\\
+ x_2\\
+ ..\\
+x_n
+\end{bmatrix}
+= \begin{bmatrix}
+ \widetilde{b_1}\\
+ \widetilde{b_2}\\
+ ..\\
+\widetilde{b_n}
+\end{bmatrix}
+\]</span></p>
+<p>Step 2:</p>
+<p>Now we can solve <span class="math inline">\(x_n\)</span> using <span class="math inline">\(u_{nn}x_n = \widetilde{b_n}\)</span>. Then we plug <span class="math inline">\(x_n\)</span> to the second last row we can solve <span class="math inline">\(x_{n-1}\)</span>, and so on.</p>
 
 
   </article>
