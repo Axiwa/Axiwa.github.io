@@ -4,6 +4,23 @@
   
     
     <entry>
+      <title>LU分解、Chelosky分解、QR分解</title>
+      <link href="/2022/08/18/cla/"/>
+      <url>/2022/08/18/cla/</url>
+      
+      
+      <categories>
+          
+          <category> Math </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>碎碎念</title>
       <link href="/2022/08/13/diary/"/>
       <url>/2022/08/13/diary/</url>
@@ -63,23 +80,6 @@
       <categories>
           
           <category> Debug </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>LU分解、Chelosky分解、QR分解</title>
-      <link href="/2022/04/16/cla/"/>
-      <url>/2022/04/16/cla/</url>
-      
-      
-      <categories>
-          
-          <category> Math </category>
           
       </categories>
       

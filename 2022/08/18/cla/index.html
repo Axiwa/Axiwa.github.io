@@ -50,12 +50,12 @@
 
     </div>
     <div class="meta center">
-      <time datetime="2022-04-15T22:48:29.087Z" itemprop="datePublished">
+      <time datetime="2022-08-17T22:36:40.341Z" itemprop="datePublished">
   <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
   </svg>
   &nbsp;
-  2022-04-16
+  2022-08-18
 </time>
 
 
@@ -75,7 +75,7 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lu-decomposition"><span class="toc-text">LU decomposition</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#by-gauss-elimination"><span class="toc-text">By Gauss elimination</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#by-recursion"><span class="toc-text">By recursion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lup-decomposition"><span class="toc-text">LUP decomposition</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#by-recursion-1"><span class="toc-text">By recursion</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#gauss-elimination"><span class="toc-text">Gauss Elimination</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lu-decomposition"><span class="toc-text">LU decomposition</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#by-gauss-elimination"><span class="toc-text">By Gauss elimination</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#by-recursion"><span class="toc-text">By recursion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lup-decomposition"><span class="toc-text">LUP decomposition</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#by-recursion-1"><span class="toc-text">By recursion</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
@@ -83,7 +83,9 @@
     <p>花式解决<span class="math inline">\(Ax = b\)</span> <span id="more"></span></p>
 <p><a target="_blank" rel="noopener" href="https://courses.engr.illinois.edu/cs357/sp2020">LU Decomposition for Solving Linear Equations</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bigmonkey/p/9555710.html">线性代数笔记10——矩阵的LU分解</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/matrix-solve.html">线性方程组求解与LU分解</a> ## Gauss Elimination Suppose we have a set of linear equations: <span class="math display">\[
+<p><a target="_blank" rel="noopener" href="https://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/matrix-solve.html">线性方程组求解与LU分解</a></p>
+<h2 id="gauss-elimination">Gauss Elimination</h2>
+<p>Suppose we have a set of linear equations: <span class="math display">\[
 \begin{bmatrix}
 a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\
 a_{21} &amp; a_{22} &amp; .. &amp; .. \\
@@ -231,7 +233,7 @@ E_{n-1} P_{n-1} \ldots E_{2} P_{2} E_{1} P_{1} A=U
 \]</span> =&gt; <span class="math display">\[
 PA = LU,\text { where } P=\prod_{i=1}^{n-1} P_{i}
 \]</span></p>
-<p>Though swapping two rows each time, the complexity is still <span class="math inline">\(O(2n^3/3)\)</span> (我觉得好像是这样...最多多出来O(n^2)次操作...)</p>
+<p>Though swapping two rows each time, the complexity is still <span class="math inline">\(O(2n^3/3)\)</span> (我觉得好像是这样...最多多出来<span class="math inline">\(O(n^2)\)</span>次操作...)</p>
 <h3 id="by-recursion-1">By recursion</h3>
 
 
