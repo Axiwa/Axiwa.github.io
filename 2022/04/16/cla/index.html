@@ -75,14 +75,15 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lu-decomposition"><span class="toc-text">LU decomposition</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lu-decomposition"><span class="toc-text">LU decomposition</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#by-gauss-elimination"><span class="toc-text">By Gauss elimination</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#by-recursion"><span class="toc-text">By recursion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lup-decomposition"><span class="toc-text">LUP decomposition</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#by-recursion-1"><span class="toc-text">By recursion</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
     </div>
     <p>花式解决<span class="math inline">\(Ax = b\)</span> <span id="more"></span></p>
-<h2 id="lu-decomposition">LU decomposition</h2>
-<p>Suppose we have a set of linear equations: <span class="math display">\[
+<p><a target="_blank" rel="noopener" href="https://courses.engr.illinois.edu/cs357/sp2020">LU Decomposition for Solving Linear Equations</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bigmonkey/p/9555710.html">线性代数笔记10——矩阵的LU分解</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/matrix-solve.html">线性方程组求解与LU分解</a> ## Gauss Elimination Suppose we have a set of linear equations: <span class="math display">\[
 \begin{bmatrix}
 a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\
 a_{21} &amp; a_{22} &amp; .. &amp; .. \\
@@ -135,6 +136,7 @@ a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\
  ..\\
 x_n
 \end{bmatrix}
+\]</span> <span class="math display">\[
 = \begin{bmatrix}
  b_1\\
  b_2-b_1\frac{a_{21}}{a_{11}}\\
@@ -161,8 +163,76 @@ x_n
 \widetilde{b_n}
 \end{bmatrix}
 \]</span></p>
+<p>This process can be seen as</p>
+<p><span class="math display">\[
+\begin{aligned}
+E_1Ax = E_1b \\
+E_2E_1Ax = E_2E_1b\\
+\cdots \\
+E_n..E_1Ax = E_n...E_1b = Ux\\
+(E_n...E_1)^{-1}Ux = b \\
+LUx = b
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(E_i\)</span></p>
+<p><span class="math display">\[
+E_1 = \begin{bmatrix}
+1 &amp; 0 &amp; ...&amp;0\\
+-\frac{a_{21}}{a_{11}} &amp; 1 &amp; ...&amp;0 \\
+-\frac{a_{31}}{a_{11}}&amp;0&amp;1...&amp;0\\
+...\\
+-\frac{a_{n1}}{a_{11}}&amp;..&amp;&amp;1
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+E_2 = \begin{bmatrix}
+1 &amp; 0 &amp; ...&amp;0\\
+0 &amp; 1 &amp; ...&amp;0 \\
+0&amp; -\frac{a_{32}-a_{12} \frac{a_{31}}{a_{11}}}{a_{22}-a_{12} \frac{a_{21}}{a_{11}}}  &amp;1...&amp;0\\
+...\\
+0&amp;-\frac{a_{n 2}-a_{12} \frac{a_{n 1}}{a_{11}}}{a_{22}-a_{12} \frac{a_{21}}{a_{11}}}&amp;&amp;1
+\end{bmatrix}
+\]</span></p>
+<p>...</p>
+<p>are lower triangular matrix that eliminates the element in one column. The inverse of a lower triangular matrix is still lower triangular matrix, so A can be decomposed as <span class="math inline">\(A = LU\)</span> where <span class="math inline">\(L\)</span> is a lower triangular matrix and <span class="math inline">\(U\)</span> is an upper triangular matrix. However, what if in this process an element on the diagonal (for example at row i) is zero? We are sure that there would be a row (row &gt; i) that has non-zero at col i (otherwise A is not invertable). We then exchange this two rows using a perturbation matrix <span class="math inline">\(P_i\)</span> that reorders the rows of A.</p>
+<p><span class="math display">\[
+...E_iP(i, s_i)...A = ...E_iP(i, s_i)...b
+\]</span></p>
+<p>For every row, we can exchange two rows using <span class="math inline">\(P_i\)</span> such that the current row i has the largest absolute value of i th column element. This is called "Pivoting". It can be proved(<a href="https://link.zhihu.com/?target=https%3A//www.amazon.com/Numerical-Linear-Algebra-Lloyd-Trefethen/dp/0898713617">https://link.zhihu.com/?target=https%3A//www.amazon.com/Numerical-Linear-Algebra-Lloyd-Trefethen/dp/0898713617</a>) that</p>
+<p><span class="math display">\[
+PA = LU
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+P=P\left(n-1, s_{n-1}\right) \ldots P\left(2, s_{2}\right) P\left(1, s_{1}\right)
+\]</span></p>
+<p>The first step uses <span class="math inline">\(2n(n-1)\)</span> operations (multiplication + addition = 2 floating-point operations), the second uses <span class="math inline">\(2(n-1)(n-2)\)</span>... so Step 1 uses ~ <span class="math inline">\(O(2n^3/3)\)</span></p>
 <p>Step 2:</p>
-<p>Now we can solve <span class="math inline">\(x_n\)</span> using <span class="math inline">\(u_{nn}x_n = \widetilde{b_n}\)</span>. Then we plug <span class="math inline">\(x_n\)</span> to the second last row we can solve <span class="math inline">\(x_{n-1}\)</span>, and so on.</p>
+<p>Now we can solve <span class="math inline">\(x_n\)</span> using <span class="math inline">\(u_{nn}x_n = \widetilde{b_n}\)</span>. Then we plug <span class="math inline">\(x_n\)</span> to the second last row we can solve <span class="math inline">\(x_{n-1}\)</span>, and so on... by back substitution we can solve <span class="math inline">\(Ub = \widetilde{b}\)</span> in <span class="math inline">\(O(n^2)\)</span></p>
+<h2 id="lu-decomposition">LU decomposition</h2>
+<p>We have seen that an invertable matrix A can be decomposed to <span class="math inline">\((P^{T})LU\)</span>. How can we get <span class="math inline">\(P, L, U\)</span>?</p>
+<h3 id="by-gauss-elimination">By Gauss elimination</h3>
+<p>From Gauss elimination we know <span class="math display">\[
+L = E^{-1}_1E^{-1}_2...E^{-1}_n
+\]</span></p>
+<p>And we can get <span class="math inline">\(L\)</span> by multiplication and inverse of these lower triangular matrices. Note that for lower triangular matrices <span class="math inline">\(E_i\)</span> with diagnal element 1, the inverse and multiplication is quite simple, and we can build <span class="math inline">\(L\)</span> with <span class="math inline">\(E_i\)</span>(<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/84210687">https://zhuanlan.zhihu.com/p/84210687</a>). Thus the complexity of LU decomposition and solve this linear equation is</p>
+<ol type="1">
+<li><p>LU decomposition: <span class="math inline">\(2n^2/3\)</span></p></li>
+<li><p>Solve <span class="math inline">\(Ly = b\)</span>: <span class="math inline">\(n^2\)</span></p></li>
+<li><p>Solve <span class="math inline">\(Ux = y\)</span>: <span class="math inline">\(n^2\)</span></p></li>
+</ol>
+<p>We use LU decomposition but not Gauss elimination because we don't want to bother to modify <span class="math inline">\(b\)</span> every time, especially when we have many different <span class="math inline">\(b\)</span></p>
+<h3 id="by-recursion">By recursion</h3>
+<p>???</p>
+<h2 id="lup-decomposition">LUP decomposition</h2>
+<p>Every time we left-multiply a perturbation matrix <span class="math inline">\(P\)</span> and get</p>
+<p><span class="math display">\[
+E_{n-1} P_{n-1} \ldots E_{2} P_{2} E_{1} P_{1} A=U
+\]</span> =&gt; <span class="math display">\[
+PA = LU,\text { where } P=\prod_{i=1}^{n-1} P_{i}
+\]</span></p>
+<p>Though swapping two rows each time, the complexity is still <span class="math inline">\(O(2n^3/3)\)</span> (我觉得好像是这样...最多多出来O(n^2)次操作...)</p>
+<h3 id="by-recursion-1">By recursion</h3>
 
 
   </article>
