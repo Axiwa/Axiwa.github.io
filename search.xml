@@ -4,6 +4,40 @@
   
     
     <entry>
+      <title>碎碎念</title>
+      <link href="/2022/09/12/diary/"/>
+      <url>/2022/09/12/diary/</url>
+      
+      
+      <categories>
+          
+          <category> 废话 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>My stackoverflow</title>
+      <link href="/2022/09/12/remember%20sth/"/>
+      <url>/2022/09/12/remember%20sth/</url>
+      
+      
+      <categories>
+          
+          <category> Debug </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>LU分解、Chelosky分解、QR分解</title>
       <link href="/2022/08/18/cla/"/>
       <url>/2022/08/18/cla/</url>
@@ -21,23 +55,6 @@
     
     
     <entry>
-      <title>碎碎念</title>
-      <link href="/2022/08/13/diary/"/>
-      <url>/2022/08/13/diary/</url>
-      
-      
-      <categories>
-          
-          <category> 废话 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>CS440 Rendering Engine</title>
       <link href="/2022/07/16/cs440/"/>
       <url>/2022/07/16/cs440/</url>
@@ -46,23 +63,6 @@
       <categories>
           
           <category> Project </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>My stackoverflow</title>
-      <link href="/2022/07/02/remember%20sth/"/>
-      <url>/2022/07/02/remember%20sth/</url>
-      
-      
-      <categories>
-          
-          <category> Debug </category>
           
       </categories>
       
