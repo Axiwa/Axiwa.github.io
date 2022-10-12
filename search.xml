@@ -5,13 +5,30 @@
     
     <entry>
       <title>碎碎念</title>
-      <link href="/2022/09/12/diary/"/>
-      <url>/2022/09/12/diary/</url>
+      <link href="/2022/10/12/diary/"/>
+      <url>/2022/10/12/diary/</url>
       
       
       <categories>
           
           <category> 废话 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Vulkan学习(1) Basics</title>
+      <link href="/2022/09/19/VulkanBasic/"/>
+      <url>/2022/09/19/VulkanBasic/</url>
+      
+      
+      <categories>
+          
+          <category> Vulkan </category>
           
       </categories>
       
