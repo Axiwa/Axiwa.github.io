@@ -4,6 +4,23 @@
   
     
     <entry>
+      <title>Euler Angle - Quaternion - Axis Angle</title>
+      <link href="/2022/10/29/rotation/"/>
+      <url>/2022/10/29/rotation/</url>
+      
+      
+      <categories>
+          
+          <category> computer graphics </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>碎碎念</title>
       <link href="/2022/10/13/diary/"/>
       <url>/2022/10/13/diary/</url>
@@ -28,7 +45,7 @@
       
       <categories>
           
-          <category> Vulkan </category>
+          <category> computer graphics </category>
           
       </categories>
       
