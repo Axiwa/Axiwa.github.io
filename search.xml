@@ -4,9 +4,43 @@
   
     
     <entry>
+      <title>没见过的需求</title>
+      <link href="/2022/11/01/trick/"/>
+      <url>/2022/11/01/trick/</url>
+      
+      
+      <categories>
+          
+          <category> Debug </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Euler Angle - Quaternion - Axis Angle</title>
-      <link href="/2022/10/29/rotation/"/>
-      <url>/2022/10/29/rotation/</url>
+      <link href="/2022/11/01/rotation/"/>
+      <url>/2022/11/01/rotation/</url>
+      
+      
+      <categories>
+          
+          <category> computer graphics </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Vulkan学习(1) Basics</title>
+      <link href="/2022/11/01/VulkanBasic/"/>
+      <url>/2022/11/01/VulkanBasic/</url>
       
       
       <categories>
@@ -29,23 +63,6 @@
       <categories>
           
           <category> 废话 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Vulkan学习(1) Basics</title>
-      <link href="/2022/09/19/VulkanBasic/"/>
-      <url>/2022/09/19/VulkanBasic/</url>
-      
-      
-      <categories>
-          
-          <category> computer graphics </category>
           
       </categories>
       

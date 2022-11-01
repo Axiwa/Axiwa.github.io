@@ -8,12 +8,12 @@
   <meta name="google-site-verification" content="" />
   <meta name="referrer" content="unsafe-url">
   
-  <title>Vulkan学习(1) Basics</title>
+  <title>没见过的需求</title>
   <meta name="author" content="Axiwa">
   <meta name="description" content="Silent site">
   
   
-  <meta property="og:title" content="Vulkan学习(1) Basics"/>
+  <meta property="og:title" content="没见过的需求"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="Azure"/>
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
@@ -43,19 +43,19 @@
       
   
     <h1 class="page-title center">
-        Vulkan学习(1) Basics
+        没见过的需求
     </h1>
   
 
 
     </div>
     <div class="meta center">
-      <time datetime="2022-09-19T14:10:31.760Z" itemprop="datePublished">
+      <time datetime="2022-11-01T10:04:54.570Z" itemprop="datePublished">
   <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
   </svg>
   &nbsp;
-  2022-09-19
+  2022-11-01
 </time>
 
 
@@ -66,7 +66,7 @@
       <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
     </svg>
     &nbsp;
-    <a href="/categories/computer-graphics/">computer graphics</a>
+    <a href="/categories/Debug/">Debug</a>
 
 
 
@@ -75,14 +75,23 @@
     </div>
     <hr>
     
-      
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8c%E8%B0%83%E7%94%A8docker-container-periodically"><span class="toc-text">用C++调用docker container periodically</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%AE%9E%E7%8E%B0%E6%9C%80%E5%BF%AB%E7%9A%84%E9%80%9A%E4%BF%A1%E5%92%8C%E5%90%8C%E6%AD%A5"><span class="toc-text">进程间实现最快的通信和同步</span></a></li></ol>
     
     <div class="picture-container">
       
     </div>
-    <p>照着 <a target="_blank" rel="noopener" href="https://vulkan-tutorial.com/">https://vulkan-tutorial.com/</a>画三角形</p>
+    <p>是老板的脑洞太奇葩还是我的经验太少T_T</p>
 <span id="more"></span>
-<p>画了一个正方体，每次只有转到固定角度才会看到旁边的4个面，原来rasterizer的剔除模式设置的是背面剔除，但我的面的normal是反的...</p>
+<h3 id="用c调用docker-container-periodically">用C++调用docker container periodically</h3>
+<blockquote>
+<p>每次传一个数组给docker中的程序，计算，返回另一个数组</p>
+</blockquote>
+<p>尚未解决</p>
+<h3 id="进程间实现最快的通信和同步">进程间实现最快的通信和同步</h3>
+<blockquote>
+<p>要求用shared memory</p>
+</blockquote>
+<p>用boost的interprocess库，锁，STL，allocator一应俱全</p>
 
 
   </article>
