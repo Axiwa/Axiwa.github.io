@@ -4,14 +4,31 @@
   
     
     <entry>
-      <title>没见过的需求</title>
-      <link href="/2022/11/01/trick/"/>
-      <url>/2022/11/01/trick/</url>
+      <title>随机数和图形学</title>
+      <link href="/2022/11/01/randomNumber/"/>
+      <url>/2022/11/01/randomNumber/</url>
       
       
       <categories>
           
-          <category> Debug </category>
+          <category> Ccomputer graphics </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>碎碎念</title>
+      <link href="/2022/11/01/diary/"/>
+      <url>/2022/11/01/diary/</url>
+      
+      
+      <categories>
+          
+          <category> 废话 </category>
           
       </categories>
       
@@ -38,14 +55,14 @@
     
     
     <entry>
-      <title>Vulkan学习(1) Basics</title>
-      <link href="/2022/11/01/VulkanBasic/"/>
-      <url>/2022/11/01/VulkanBasic/</url>
+      <title>没见过的需求</title>
+      <link href="/2022/11/01/trick/"/>
+      <url>/2022/11/01/trick/</url>
       
       
       <categories>
           
-          <category> computer graphics </category>
+          <category> Debug </category>
           
       </categories>
       
@@ -55,14 +72,14 @@
     
     
     <entry>
-      <title>碎碎念</title>
-      <link href="/2022/10/13/diary/"/>
-      <url>/2022/10/13/diary/</url>
+      <title>Vulkan学习(1) Basics</title>
+      <link href="/2022/11/01/VulkanBasic/"/>
+      <url>/2022/11/01/VulkanBasic/</url>
       
       
       <categories>
           
-          <category> 废话 </category>
+          <category> computer graphics </category>
           
       </categories>
       

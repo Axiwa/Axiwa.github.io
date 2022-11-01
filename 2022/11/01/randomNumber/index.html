@@ -8,12 +8,12 @@
   <meta name="google-site-verification" content="" />
   <meta name="referrer" content="unsafe-url">
   
-  <title>Euler Angle - Quaternion - Axis Angle</title>
+  <title>随机数和图形学</title>
   <meta name="author" content="Axiwa">
   <meta name="description" content="Silent site">
   
   
-  <meta property="og:title" content="Euler Angle - Quaternion - Axis Angle"/>
+  <meta property="og:title" content="随机数和图形学"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="Azure"/>
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
@@ -43,14 +43,14 @@
       
   
     <h1 class="page-title center">
-        Euler Angle - Quaternion - Axis Angle
+        随机数和图形学
     </h1>
   
 
 
     </div>
     <div class="meta center">
-      <time datetime="2022-11-01T15:35:20.101Z" itemprop="datePublished">
+      <time datetime="2022-11-01T15:43:18.693Z" itemprop="datePublished">
   <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
   </svg>
@@ -66,7 +66,7 @@
       <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
     </svg>
     &nbsp;
-    <a href="/categories/computer-graphics/">computer graphics</a>
+    <a href="/categories/Ccomputer-graphics/">Ccomputer graphics</a>
 
 
 
@@ -75,49 +75,17 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#euler-angle"><span class="toc-text">Euler Angle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E6%97%8B%E5%8F%B3%E6%89%8B%E7%B3%BByxz"><span class="toc-text">外旋+右手系+YXZ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%87%E5%90%91%E9%94%81"><span class="toc-text">万向锁</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E9%9A%8F%E6%9C%BA%E7%9A%84int64_t%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E5%8F%96%E5%A5%87%E5%81%B6%E4%BD%8D%E5%88%86%E5%88%AB%E8%8E%B7%E5%BE%97%E4%B8%A4%E4%B8%AAint32_t%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%90%97"><span class="toc-text">一个随机的int64_t可以通过取奇偶位分别获得两个int32_t的随机数吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%8F%AF%E8%83%BD%E9%80%9A%E8%BF%87%E4%B8%80%E4%B8%AA%E9%AB%98%E7%B2%BE%E5%BA%A6%E9%9A%8F%E6%9C%BA%E6%95%B0%E8%8E%B7%E5%BE%97%E4%B8%A4%E4%B8%AA%E4%BD%8E%E7%B2%BE%E5%BA%A6%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%90%97"><span class="toc-text">有可能通过一个高精度随机数获得两个低精度的随机数吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9A%84reuse"><span class="toc-text">什么是随机数的reuse？</span></a></li></ol>
     
     <div class="picture-container">
       
     </div>
-    <p>三维旋转</p>
+    <p>概率统计苦手每次遇到sampling的东西都一头雾水！</p>
+<p>动机：跟着PBRT写经典的基于Marschner毛发渲染的时候需要用到4个随机数，可是一般的sample()方程只会传入2个(pbrt)或者3个(mitsuba)随机数。pbrt处理的做法是将随机数<span class="math inline">\(\eta\)</span>变成64位的int，然后分别取奇数位的值和偶数位上的数字组成一个32位的数字，就得到了两个随机数！然而，这两个数字是真的均匀分布的随机数吗？</p>
 <span id="more"></span>
-<h2 id="euler-angle">Euler Angle</h2>
-<p>每次沿着X/Y/Z轴旋转一个角度，根据旋转的顺序（先绕X旋转后绕Y旋转），旋转轴是global还是local（轴的方向是固定的 or 随着物体转动），每次涉及到什么轴（X-Y-X or X-Y-Z）有12种转动方法。根据涉及到的轴的个数分为<strong>Proper Euler Angle</strong>（绕轴顺序可能为XYX,YXY,XZX,ZXZ,YZY,ZYZ）和<strong>Tait-Brayan Euler Angle</strong>（绕轴顺序可能为XYZ,XZY,YXZ,YZX,ZXY,ZYX）</p>
-<h3 id="外旋右手系yxz">外旋+右手系+YXZ</h3>
-<p>对于外旋，<span class="math inline">\(Y_1X_2Z_3\)</span>实际上是先绕Z轴旋转<span class="math inline">\(R_z()\)</span>，再绕X轴旋转<span class="math inline">\(R_x()\)</span>，再绕Y轴旋转<span class="math inline">\(R_y()\)</span>。如果是内旋，则是按照YXZ的顺序旋转</p>
-<p>右手系的旋转矩阵:</p>
-$$
-<span class="math display">\[\begin{aligned}
-R_z(\gamma) = \begin{bmatrix}
-\cos \gamma &amp; -\sin \gamma &amp; 0 \\
-\sin \gamma&amp; \cos \gamma &amp; 0 \\
-0 &amp; 0 &amp; 1\\
-\end{bmatrix} \\
-R_x(\beta) = \begin{bmatrix}
-1 &amp; 0 &amp; 0\\
-0 &amp; \cos \beta &amp; -\sin \beta \\
-0 &amp; \sin \beta &amp; \cos \beta \\
-
-\end{bmatrix} \\
-R_y(\alpha) = \begin{bmatrix}
-\cos \alpha &amp; 0 &amp; \sin \alpha \\
-0 &amp; 1 &amp; 0 \\
--\sin \alpha &amp; 0 &amp; \cos \alpha\\
-\end{bmatrix} 
-\end{aligned}\]</span>
-<p>$$</p>
-<p>如果我们需要旋转一个<span class="math inline">\(\mathbf{x} = \begin{bmatrix} x \\ y \\ z \end{bmatrix}\)</span> 的向量，则作用在它上面的旋转矩阵为()</p>
-<p><span class="math display">\[
-R = R_yR_xR_z\mathbf{x} = \\
-\left[\begin{array}{ccc}
-c_1 c_3+s_1 s_2 s_3 &amp; c_3 s_1 s_2-c_1 s_3 &amp; c_2 s_1 \\
-c_2 s_3 &amp; c_2 c_3 &amp; -s_2 \\
-c_1 s_2 s_3-s_1 c_3 &amp; s_1 s_3+c_1 c_3 s_2 &amp; c_1 c_2
-\end{array}\right]\mathbf{x}
-\]</span> 其中<span class="math inline">\(c_1 = cos(\alpha), s_1 = sin(\alpha)\)</span>...</p>
-<p>维基百科: <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Euler_angles">https://en.wikipedia.org/wiki/Euler_angles</a></p>
-<h3 id="万向锁">万向锁</h3>
+<h3 id="一个随机的int64_t可以通过取奇偶位分别获得两个int32_t的随机数吗">一个随机的int64_t可以通过取奇偶位分别获得两个int32_t的随机数吗？</h3>
+<h3 id="有可能通过一个高精度随机数获得两个低精度的随机数吗">有可能通过一个高精度随机数获得两个低精度的随机数吗？</h3>
+<h3 id="什么是随机数的reuse">什么是随机数的reuse？</h3>
 
 
   </article>
