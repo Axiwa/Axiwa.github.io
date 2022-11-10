@@ -154,12 +154,14 @@ L(\mathbf{x}, \vec{\omega}) &amp;=T_{r}\left(\mathbf{x}, \mathbf{x}_{z}\right) L
 </ol>
 <p>Empty medium is quite simple. Its <span class="math inline">\(T_r\)</span> and <span class="math inline">\(pdf\)</span> is just 1.f and the <code>Sample</code> method just "forward" the ray in its direction.</p>
 <p>The empty medium should generate exactly same figure as no medium. In the picture we could see a line that shows the existence of bigger ball. Because my renderer uses the intersection and its mesh's BSDF/Medium pointer to determine the location of the ray, it does not handle the case where the light and the boundary are almost tangent/interleaved mesh and volume very well.</p>
+<p>The upper is the scene rendered by Blender <code>cycles</code>.</p>
 <p><img src="/images/sphere_ref.png" /><img src="/images/sphere_empty.png" /></p>
 <ol start="2" type="1">
 <li>God ray test</li>
 </ol>
 <p>The upper is the scene rendered by Blender <code>cycles</code>. Both renderer uses 1024 samples/pixel. There are still some problems regarding how to determine what kind of interaction is, so the wall cannot be too close to the volume. The difference may be because the parameters are different.</p>
 <p><img src="/images/room_ref.png" /><img src="/images/room.png" /></p>
+<p>The scene with and without fog: <img src="/images/withfog.png" /></p>
 <ol start="3" type="1">
 <li>Numerical validation?</li>
 </ol>
@@ -200,7 +202,7 @@ P^{\top}TP
 <p>where the big ball has a transform of scale and displacement in y direction with respect to the small one, and the small ball has applied all the transform (identity matrix).</p>
 <p>We use the example above to render using two objects (small.obj &amp; big.obj) or only use the small ball and a transform of it.</p>
 <p>We can get the same output</p>
-<p><img src="/images/sphere_two.png" /><img src="/images/phere_one.png" /></p>
+<p><img src="/images/sphere_two.png" /><img src="/images/sphere_one.png" /></p>
 <p>The actual transform is that the big ball is twice the size of small ball, and then translate 1.5m in the negative direction of the y-axis. However, from the transform matrix we could see the translation is at z axis and changes the sign. We should also note that when apply transform in Blender, the parent object's transform should be applied at first, otherwise the matrix we get is not correct.</p>
 <ol start="2" type="1">
 <li>Memory usage</li>
