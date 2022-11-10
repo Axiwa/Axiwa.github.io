@@ -4,14 +4,14 @@
   
     
     <entry>
-      <title>随机数和图形学</title>
-      <link href="/2022/11/01/randomNumber/"/>
-      <url>/2022/11/01/randomNumber/</url>
+      <title>CS440 Rendering Engine</title>
+      <link href="/2022/11/10/cs440/"/>
+      <url>/2022/11/10/cs440/</url>
       
       
       <categories>
           
-          <category> Ccomputer graphics </category>
+          <category> Project </category>
           
       </categories>
       
@@ -29,6 +29,23 @@
       <categories>
           
           <category> 废话 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>随机数和图形学</title>
+      <link href="/2022/11/01/randomNumber/"/>
+      <url>/2022/11/01/randomNumber/</url>
+      
+      
+      <categories>
+          
+          <category> Ccomputer graphics </category>
           
       </categories>
       
@@ -114,23 +131,6 @@
       <categories>
           
           <category> Math </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>CS440 Rendering Engine</title>
-      <link href="/2022/07/16/cs440/"/>
-      <url>/2022/07/16/cs440/</url>
-      
-      
-      <categories>
-          
-          <category> Project </category>
           
       </categories>
       
