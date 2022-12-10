@@ -4,9 +4,26 @@
   
     
     <entry>
+      <title>C++ 模板类</title>
+      <link href="/2022/12/10/template/"/>
+      <url>/2022/12/10/template/</url>
+      
+      
+      <categories>
+          
+          <category> C++ </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CS440 Rendering Engine</title>
-      <link href="/2022/07/16/cs440/"/>
-      <url>/2022/07/16/cs440/</url>
+      <link href="/2022/11/10/cs440/"/>
+      <url>/2022/11/10/cs440/</url>
       
       
       <categories>
@@ -45,7 +62,7 @@
       
       <categories>
           
-          <category> Ccomputer graphics </category>
+          <category> Computer graphics </category>
           
       </categories>
       
@@ -62,7 +79,7 @@
       
       <categories>
           
-          <category> computer graphics </category>
+          <category> Computer graphics </category>
           
       </categories>
       
@@ -96,7 +113,7 @@
       
       <categories>
           
-          <category> computer graphics </category>
+          <category> Computer graphics </category>
           
       </categories>
       
