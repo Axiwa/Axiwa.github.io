@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>Neural ODE</title>
+  <meta name="author" content="Axiwa">
+  <meta name="description" content="Silent site">
+  
+  
+  <meta property="og:title" content="Neural ODE"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Azure"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Azure" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Neural ODE
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2022-12-12T21:55:01.445Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2022-12-12
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/Project/">Project</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dynamic-system-machine-learning"><span class="toc-text">Dynamic system &amp; Machine
+learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#adjoint-method-optimization"><span class="toc-text">Adjoint method &amp;
+optimization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#optimal-control"><span class="toc-text">Optimal control</span></a></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h2 id="dynamic-system-machine-learning">Dynamic system &amp; Machine
+learning</h2>
+<p>When I was reading the paper <a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/1806.07366v4">Neural Ordinary Differential
+Equations</a>, I was confused of the adjoint method, so I turned to <a
+target="_blank" rel="noopener" href="https://doi.org/10.1007/s40304-017-0103-z">A Proposal on Machine
+Learning via Dynamical Systems</a>. It is clearer about what we should
+do. We begin from the side of dynamical system:</p>
+<p>Consider the differential equation in</p>
+<p><span class="math inline">\(\frac{dx}{dt} = f(u(t),x), x(0)=x_0,
+u(t)\in U, t\in [0,T]\)</span></p>
+<p>We want to find the function <span
+class="math inline">\(u(t)\)</span>, defined in <span
+class="math inline">\([0,T]\)</span> that minimizes/maximizes</p>
+<p><span class="math inline">\(J(u) = \Psi(x(T))+\int_0^T
+L(x,u)dt\)</span></p>
+<p>If we fix a time horizon T, there is a mapping:</p>
+<p><span class="math inline">\(x_0 \rightarrow x(T,x_0)\)</span></p>
+<p>If we consider supervised learning and for each data point <span
+class="math inline">\(x_0^i\)</span> there is a label <span
+class="math inline">\(y^i\)</span> associated with it, our question is
+whether the flow map of a given dynamical system can describe the model
+properly and to choose <span class="math inline">\(u(t)\)</span> such
+that a loss function of <span class="math inline">\(x(T, x_0)\)</span>
+and <span class="math inline">\(y(x_0)\)</span> could be minimized
+(<span class="math inline">\(\mu(x)\)</span> is the distribution).</p>
+<p><span class="math inline">\(\int(y(x)-g(x(T)))^2d\mu(x)+\int_0^T
+L(x,u)dt\)</span> <span class="math inline">\(=
+\sum_i(y_i-x_i(T))^2+\int_0^T L(x,u)dt\)</span></p>
+<p>We consider the <a
+target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/residual-networks-resnet-deep-learning/">ResNet</a>:</p>
+<p><span class="math inline">\(x_{t+1} = x_{t}+f(u(t), x_t)\)</span></p>
+<p>When we use artificial time (adaptively choosing <span
+class="math inline">\(\Delta t\)</span> -&gt; layers) and there are
+plenty of layers, then this is the discrete form of our differential
+equation.</p>
+<p><span class="math inline">\(\frac{dx}{dt} = f(u(t),x), x(0)=x_0,
+u(t)\in U, t\in [0,T]\)</span></p>
+<p>Then we can regard <span class="math inline">\(\Psi\)</span> as the
+loss function and the integral (running cost) as the regularization
+term, and we could find the similarity between the deep neural network
+and dynamic systems.</p>
+<h2 id="adjoint-method-optimization">Adjoint method &amp;
+optimization</h2>
+<p>Why is there adjustment to adj_y? <a
+target="_blank" rel="noopener" href="https://github.com/rtqichen/torchdiffeq/issues/59#issue-452634924"
+class="uri">https://github.com/rtqichen/torchdiffeq/issues/59#issue-452634924</a></p>
+<p>ODEint problem: why do we need interpolation? <a
+target="_blank" rel="noopener" href="https://github.com/rtqichen/torchdiffeq/issues/114"
+class="uri">https://github.com/rtqichen/torchdiffeq/issues/114</a></p>
+<p>torch.autograd.grad???</p>
+<p>Code Math Description func_eval f(t1,y(t1),θ)f(t_1, y(t_1),
+)f(t1​,y(t1​),θ) (arg) The output whose derivative you want. y
+y(t1)y(t_1)y(t1​) (arg) The state w.r.t to which you want output’s
+derivative. adj_y λ(t1)⊺(t_1)^(t1​)⊺ (arg) The free choice adjoint
+vector/lagrange multiplier. vjp_y λ(t1)⊺∂f∂y(t1)(t_1)^λ(t1​)⊺∂y(t1​)∂f​
+(ret) The vector-Jacobian product.</p>
+<h2 id="optimal-control">Optimal control</h2>
+<p>What we need to do is to optimize <span
+class="math inline">\(u(t)\)</span> to minimize the <span
+class="math inline">\(J\)</span>. This is a classic optimal control
+problem, which could be solved when solving the <em>Hamiltonian
+system</em>. This is the <strong>Pontryagin's maximum
+principle</strong>.</p>
+<p>If we consider a Lagrangian multiplier vector <span
+class="math inline">\(\lambda\)</span>, and construct the
+<em>Hamiltonian</em> H:</p>
+<p><span class="math inline">\(H(x(t),u(t),\lambda(t),t) =
+\lambda^T(t)f(x(t),u(t))+L(x(t),u(t))\)</span></p>
+<p>Pontryagin's minimum principle states that the optimal state
+trajectory <span class="math inline">\(x^*\)</span>, optimal control
+<span class="math inline">\(u^*\)</span>, and corresponding Lagrange
+multiplier vector <span class="math inline">\(\lambda^*\)</span> must
+minimize the Hamiltonian H so that:</p>
+<ol type="1">
+<li><span class="math inline">\(H(x^*(t), u^*,\lambda^*,t) \leq
+H(x^*(t),u,\lambda^*,t)\)</span></li>
+</ol>
+<p>(if there is no constraint on <span
+class="math inline">\(u(t)\)</span>, (1) becomes <span
+class="math inline">\(H_u = 0\)</span>)</p>
+<ol start="2" type="1">
+<li><p><span class="math inline">\(\Psi_T(x(T))+H(T) =
+0\)</span></p></li>
+<li><p><span class="math inline">\(-\dot{\lambda}^{T}(t) =
+H_x(x^*(t),u^*(t),\lambda(t),t)\)</span></p></li>
+<li><p><span class="math inline">\(\lambda^{T}(T) =
+\Psi_x(x(T))\)</span></p></li>
+</ol>
+<p>The meaning of the notation can be found in <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Pontryagin%27s_maximum_principle"
+class="uri">https://en.wikipedia.org/wiki/Pontryagin%27s_maximum_principle</a>,
+and a simplified proof could be found on <a
+target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=i3Ca509ws-c"
+class="uri">https://www.youtube.com/watch?v=i3Ca509ws-c</a> and <a
+target="_blank" rel="noopener" href="https://people.kth.se/~aaurell/Courses/SF3971_VTHT15/SMP-intro.pdf"
+class="uri">https://people.kth.se/~aaurell/Courses/SF3971_VTHT15/SMP-intro.pdf</a>.
+But the clearest proof in Chinese for me is
+<最优控制理论与系统>定理3-6</p>
+<p>From the beginning I thought the adjoint sensitive method is the
+related to this but it seems not much...so I just give some links here
+from this viewpoint.</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1710.09513">Maximum Principle Based
+Algorithms for Deep Learning</a></p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1812.04352">Layer-Parallel Training of
+Deep Residual Neural Networks</a></p>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © Azure 2020-2022
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
