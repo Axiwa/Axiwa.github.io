@@ -93,7 +93,7 @@
   </header>
   <footer class="entry-meta">
     <a href="/2023/04/04/diary/">
-    <time datetime="2023-04-04T12:23:43.900Z" class="entry-date">
+    <time datetime="2023-04-04T12:31:10.230Z" class="entry-date">
         2023-04-04
     </time>
 </a>
@@ -173,5 +173,20 @@
 <div id="bg"></div>
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
