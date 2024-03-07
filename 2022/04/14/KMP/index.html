@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="Silent site" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>KMP算法 | Azure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="KMP Algorithm for Pattern Searching 屡看屡忘，屡忘屡看...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP算法">
+<meta property="og:url" content="http://axiwa.github.io/2022/04/14/KMP/index.html">
+<meta property="og:site_name" content="Azure">
+<meta property="og:description" content="KMP Algorithm for Pattern Searching 屡看屡忘，屡忘屡看...">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-07T09:23:47.425Z">
+<meta property="article:author" content="Axiwa">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="https://axiwa.github.io" title="Azure" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Azure" rel="home">Azure</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        Silent site
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">MENU</button>
+            <a class="assistive-text" href="/#content" title="JUMP TO">JUMP TO/a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-KMP" class="post-KMP post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      KMP算法
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://axiwa.github.io/2022/04/14/KMP/" data-id="clth0tc8i000fxzcu237k1nez" class="leave-reply bdsharebuttonbox" data-cmd="more"></a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p><a
+target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/">KMP
+Algorithm for Pattern Searching</a></p>
+<p>屡看屡忘，屡忘屡看...</p>
+<span id="more"></span>
+<p>Pattern 模式串 p[0,1,..m-1]</p>
+<p>Text 主串 t[0,1,...n-1]</p>
+<p>n&gt;=m</p>
+<p>We would like to check all the occurrences of the patten string in
+text string.</p>
+<p><strong>Example</strong> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input:  t[] = &quot;THIS IS A TEST TEXT&quot;</span><br><span class="line">        p[] = &quot;TEST&quot;</span><br><span class="line"></span><br><span class="line">Output: 10</span><br></pre></td></tr></table></figure></p>
+<p>Using brute force method, for i = 0,1...n-m, we check if the text
+t[i,i+1...i+m-1] is the same as the pattern p[0,1,..m-1] one character
+by one character.</p>
+<p>The time will be O(m(n-m+1))</p>
+<h2 id="kmp">KMP</h2>
+<p>Let's see an example: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = &quot;AAAABAAAACB&quot;</span><br><span class="line">p = &quot;AAAAC&quot;</span><br></pre></td></tr></table></figure> We want to know how many
+occurrences of the p are in t.</p>
+<p>We begin from <code>i = 0, j = 0</code>, to check if
+<code>t[i] == p[j]</code>, if j reaches p.size(), we find one
+occurrence.</p>
+<p>When <code>i=4, j=4</code>, we have <code>t[i]!=p[j]</code>. In naive
+algorithm, we will rebegin from <code>i=1, j=0</code>, however, we can
+observe that if we apply this change, it will still fail at
+<code>i=4, j=3</code> and we check 3 times additionally before we get
+the mismatch.</p>
+<p>Is there anything that helps us to know, the first three letters of p
+is already matched with <code>t[1...3]</code> that we don't need to
+check them? That is, when we come to <code>p[4]</code> and there is a
+mismatch, we know we don't need to restart from <code>p[0]</code> but
+instead, <code>p[3]</code>?</p>
+<p>Yes, if we know <code>p[0...2]</code> == <code>p[1...3]</code>, and
+if there is a mismatch at <code>p[4]</code> and <code>t[i]</code>, we
+still know at least <code>p[1...3]</code>, and therefore
+<code>p[0...2]</code> matches with <code>t[i-3...i-1]</code>. Then we
+just need to check from <code>t[i]</code> and <code>p[3]</code>. All we
+need is a table that records the length of the longest prefix that
+matches with the suffix up to <code>p[j]</code>. We call it
+<code>next</code>.</p>
+<p>We could see from the example that, if <code>next[i]==j</code>, that
+means <code>p[0...j-1] = p[i-j...i-1]</code> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = &quot;AAAAC&quot;</span><br><span class="line">next = [0,1,2,3,0]</span><br></pre></td></tr></table></figure> When we check
+for <code>t[i]</code> and <code>p[j]</code> and there is a mismatch,
+from the <code>next</code> table we know
+<code>t[i-next[j-1]...i-1]</code> and <code>p[0...next[j-1]-1]</code>
+match, and now what we need to do is to check
+<code>t[i] == p[next[j-1]]</code></p>
+<p>When t[4]!=p[4] <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = &quot;AAAABAAAACB&quot;</span><br><span class="line">p = &quot;AAAAC&quot;</span><br></pre></td></tr></table></figure> Set <code>j</code> to 3
+(<code>next[4-1]</code>) and check from <code>t[4]</code> and
+<code>p[3]</code> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = &quot;AAAABAAAACB&quot;</span><br><span class="line">p = &quot; AAAAC&quot;</span><br></pre></td></tr></table></figure> Still mismatch. Set <code>j</code> to 2
+and check fomr <code>t[4]</code> and <code>p[2]</code> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = &quot;AAAABAAAACB&quot;</span><br><span class="line">p = &quot;  AAAAC&quot;</span><br></pre></td></tr></table></figure>
+Still mismatch. Set <code>j</code> to 1 and check fomr <code>t[4]</code>
+and <code>p[1]</code> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = &quot;AAAABAAAACB&quot;</span><br><span class="line">p = &quot;   AAAAC&quot;</span><br></pre></td></tr></table></figure> Still mismatch. Set <code>j</code>
+to 0 and check fomr <code>t[4]</code> and <code>p[0]</code>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = &quot;AAAABAAAACB&quot;</span><br><span class="line">p = &quot;    AAAAC&quot;</span><br></pre></td></tr></table></figure> Now <code>j==0</code> and mismatch, do <code>i++</code>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = &quot;AAAABAAAACB&quot;</span><br><span class="line">p = &quot;     AAAAC&quot;</span><br></pre></td></tr></table></figure> Find an occurrence and come to <code>i=10, j=5</code>.
+Since <code>j==p.size()</code>, set <code>j</code> to
+<code>next[j-1]</code> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = &quot;AAAABAAAACB&quot;</span><br><span class="line">p = &quot;          AAAAC&quot;</span><br></pre></td></tr></table></figure> Mismatch at <code>j==0</code>, do
+<code>i++</code>, and we come to and end.</p>
+<h3 id="code">Code</h3>
+<p>Given the <code>next</code> table, <code>t</code> and
+<code>p</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(i&lt;t.<span class="built_in">size</span>())&#123;</span><br><span class="line">    <span class="keyword">if</span> (t[i] == p[j])&#123;</span><br><span class="line">        i++;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (j == p.<span class="built_in">size</span>())&#123;</span><br><span class="line">        occ.<span class="built_in">push_back</span>(i-j);</span><br><span class="line">        j = next[j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (i&lt;t.<span class="built_in">size</span>() &amp;&amp; t[i]!=p[j])&#123;</span><br><span class="line">        <span class="keyword">if</span> (j==<span class="number">0</span>)</span><br><span class="line">            i++;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            j = next[j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="how-to-get-the-next-table">How to get the <code>next</code>
+table?</h2>
+<p>We get it by induction. First we know <code>next[0] = 0</code>. Now
+if we have known <code>next[1...i]</code>, and we want to know
+<code>next[i+1]</code></p>
+<p>Assume <code>next[i]=k</code>. The simple case is, if
+<code>p[k] == p[i+1]</code>, then we know
+<code>p[0...k] = p[0...i+1]</code>, so
+<code>next[i+1] = next[i]+1</code>.</p>
+<p>What if <code>p[k] != p[i+1]</code>? As the example shows, here
+<code>?</code> cannot be 6.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = &quot;ABCABDABCABC&quot;</span><br><span class="line">next = [0,0,0,1,2,0,1,2,3,4,5,?]</span><br></pre></td></tr></table></figure>
+<p>Well, now we know <code>p[0...5] != p[6...11]</code>, though
+<code>p[0...4] == p[6...10]</code>. Is there any shorter but long enough
+prefix such that <code>p[0...l] = p[10-l...10]</code> so that we could
+chek if <code>p[l+1] == p[11]</code>?</p>
+<p>Yes, and it is <code>p[0...next[4]-1]</code> because from the
+definition of <code>next</code> we know
+<code>p[0...next[4]-1] == p[4-(next[4]-1)...4] == p[10-(next[4]-1)...10]</code>,
+so <code>p[0...next[4]-1]</code> is a prefix. Why is it long enough?
+Because we want to find a prefix that match with the suffix of
+<code>p[...10]</code>, <code>p[0...4]</code> is the longest prefix but
+<code>p[5] != p[11]</code> so it cannot be used. What is the next
+longest prefix? It must have the same prefix and suffix of
+<code>p[0...4]</code>, so we find it by check <code>next</code> at
+<code>p[4]</code>. <code>next[4]</code> is the length of the prefix so
+whe prefix is <code>p[0...next[4]-1]</code>. Then we check if
+<code>p[next[4]] == p[11]</code>, fortunately it matches, so
+<code>next[11] = next[4]+1</code>. If it does not match, we need to
+continue looking for shorter prefix, since we have come to
+<code>p[next[4]-1]</code>, the length of the next prefix is
+<code>next[next[4]-1]</code>, so every time if next length
+<code>l</code> is not zero and there is a mismatch, we check for prefix
+of length <code>next[l-1]</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">next[4] = 2</span><br><span class="line">p = &quot;ABCABDABCABC&quot;</span><br><span class="line">next = [0,0,0,1,2,0,1,2,3,4,5,3]</span><br></pre></td></tr></table></figure>
+<h3 id="code-1">Code</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> next[p.<span class="built_in">size</span>()];</span><br><span class="line">next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(i&lt;p.<span class="built_in">size</span>())&#123;</span><br><span class="line">    <span class="keyword">if</span> (p[i] == p[j])&#123;</span><br><span class="line">        next[i] = j+<span class="number">1</span>;</span><br><span class="line">        i++;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (j!=<span class="number">0</span>)&#123;</span><br><span class="line">            j = next[j<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            next[i] = <span class="number">0</span>;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2022/04/14/KMP/">
+    <time datetime="2022-04-13T16:00:00.000Z" class="entry-date">
+        2022-04-14
+    </time>
+</a>
+    
+  <span class="article-delim">&#8226;</span>
+  <div class="article-category">
+  <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+  </div>
+
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2022/05/30/cla/" rel="prev"><span class="meta-nav">←</span> LU分解、Chelosky分解、QR分解</a></span>
+    
+    
+        <span class="nav-next"><a href="/2022/04/14/lc/" rel="next">刷题 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-graphics/">Computer graphics</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Debug/">Debug</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Knowledge/">Knowledge</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lecture-notes/">Lecture notes</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Math/">Math</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%9B%E4%BD%9C/">创作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%9F%E8%AF%9D/">废话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9/">玩</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%91%E5%9B%A2/">跑团</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2024/01/27/story/">故事</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/19/diary/">正经人谁写日记啊</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/17/coc/">跑团Replay观看记录</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/02/cs440/">CS440 Rendering Engine</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/02/hair/">Hair Rendering</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2024 Axiwa
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

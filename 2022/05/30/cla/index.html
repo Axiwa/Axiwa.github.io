@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="Silent site" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>LU分解、Chelosky分解、QR分解 | Azure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="花式解决\(Ax &#x3D; b\)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LU分解、Chelosky分解、QR分解">
+<meta property="og:url" content="http://axiwa.github.io/2022/05/30/cla/index.html">
+<meta property="og:site_name" content="Azure">
+<meta property="og:description" content="花式解决\(Ax &#x3D; b\)">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-07T09:23:09.313Z">
+<meta property="article:author" content="Axiwa">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="https://axiwa.github.io" title="Azure" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Azure" rel="home">Azure</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        Silent site
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">MENU</button>
+            <a class="assistive-text" href="/#content" title="JUMP TO">JUMP TO/a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-cla" class="post-cla post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      LU分解、Chelosky分解、QR分解
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://axiwa.github.io/2022/05/30/cla/" data-id="clth0sitv0003xzcu7ki5fym4" class="leave-reply bdsharebuttonbox" data-cmd="more"></a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>花式解决<span class="math inline">\(Ax = b\)</span> <span id="more"></span></p>
+<p><a target="_blank" rel="noopener" href="https://courses.engr.illinois.edu/cs357/sp2020">LU
+Decomposition for Solving Linear Equations</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/bigmonkey/p/9555710.html">线性代数笔记10——矩阵的LU分解</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/matrix-solve.html">线性方程组求解与LU分解</a></p>
+<h2 id="gauss-elimination">Gauss Elimination</h2>
+<p>Suppose we have a set of linear equations:</p>
+<p><code>$$ \begin&#123;bmatrix&#125; a_&#123;11&#125; &amp; a_&#123;12&#125; &amp; .. &amp; a_&#123;1n&#125; \\ a_&#123;21&#125; &amp; a_&#123;22&#125; &amp; .. &amp; .. \\ .. &amp;  &amp;  &amp;  \\  &amp;  &amp;  &amp; a_&#123;nn&#125; \\ \end&#123;bmatrix&#125;\begin&#123;bmatrix&#125;  x_1\\  x_2\\  ..\\ x_n \end&#123;bmatrix&#125; = \begin&#123;bmatrix&#125;  b_1\\  b_2\\  ..\\ b_n \end&#123;bmatrix&#125; $$</code></p>
+<p>The most brute force way is to eliminate one variable each row from
+top to bottom, and then plug in the sovled variable to previous ones
+from bottom to top. It is something like this:</p>
+<p>Step 1: Let each row except 1st do not contain <span
+class="math inline">\(x_1\)</span>. Then eliminate <span
+class="math inline">\(x_2\)</span> in each row except 1st and 2nd</p>
+<p><code>$$ \begin&#123;bmatrix&#125; a_&#123;11&#125; &amp; a_&#123;12&#125; &amp; .. &amp; a_&#123;1n&#125; \\ 0 &amp; a_&#123;22&#125;-a_&#123;12&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125; &amp; .. &amp; .. \\ .. &amp;  &amp;  &amp;  \\ 0 &amp;  &amp;  &amp; a_&#123;nn&#125;-a_&#123;1n&#125;\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125; \\ \end&#123;bmatrix&#125;\begin&#123;bmatrix&#125;  x_1\\  x_2\\  ..\\ x_n \end&#123;bmatrix&#125; = \begin&#123;bmatrix&#125;  b_1\\  b_2-b_1\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;\\  ..\\ b_n-b_1\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125; \end&#123;bmatrix&#125; $$</code></p>
+<p><code>$$ \begin&#123;bmatrix&#125; a_&#123;11&#125; &amp; a_&#123;12&#125; &amp; .. &amp; a_&#123;1n&#125; \\ 0 &amp; a_&#123;22&#125;-a_&#123;12&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125; &amp; .. &amp; .. \\ 0 &amp; 0 &amp; a_&#123;33&#125;-a_&#123;13&#125;\frac&#123;a_&#123;31&#125;&#125;&#123;a_&#123;11&#125;&#125;-(a_&#123;23&#125;-a_&#123;13&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;)\frac&#123;a_&#123;32&#125;-a_&#123;12&#125;\frac&#123;a_&#123;31&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&#123;a_&#123;22&#125;-a_&#123;12&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125; &amp;  \\ .. &amp; .. &amp;  &amp;  \\ 0 &amp; 0 &amp;  &amp; a_&#123;nn&#125;-a_&#123;1n&#125;\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125;-(a_&#123;2n&#125;-a_&#123;1n&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;)\frac&#123;a_&#123;n2&#125;-a_&#123;12&#125;\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&#123;a_&#123;22&#125;-a_&#123;12&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125; \\ \end&#123;bmatrix&#125;\begin&#123;bmatrix&#125;  x_1\\  x_2\\  ..\\ x_n \end&#123;bmatrix&#125; $$</code></p>
+<p><code>$$ = \begin&#123;bmatrix&#125;  b_1\\  b_2-b_1\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;\\  ..\\ b_n-b_1\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125;-(b_2-b_1\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;)\frac&#123;a_&#123;n2&#125;-a_&#123;12&#125;\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&#123;a_&#123;22&#125;-a_&#123;12&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125; \end&#123;bmatrix&#125; $$</code></p>
+<p>If every time the denominator is not zero, finally we will get an
+upper matrix
+<code>$$ \begin&#123;bmatrix&#125; u_&#123;11&#125; &amp; u_&#123;12&#125; &amp; .. &amp; u_&#123;1n&#125; \\ 0 &amp; u_&#123;22&#125; &amp; .. &amp; .. \\ .. &amp;  &amp;  &amp;  \\ 0 &amp;  &amp;  &amp; u_&#123;nn&#125; \\ \end&#123;bmatrix&#125;\begin&#123;bmatrix&#125;  x_1\\  x_2\\  ..\\ x_n \end&#123;bmatrix&#125; = \begin&#123;bmatrix&#125;  \widetilde&#123;b_1&#125;\\  \widetilde&#123;b_2&#125;\\  ..\\ \widetilde&#123;b_n&#125; \end&#123;bmatrix&#125; $$</code></p>
+<p>This process can be seen as</p>
+<p><code>$$ \begin&#123;aligned&#125; E_1Ax = E_1b \\ E_2E_1Ax = E_2E_1b\\ \cdots \\ E_n..E_1Ax = E_n...E_1b = Ux\\ (E_n...E_1)^&#123;-1&#125;Ux = b \\ LUx = b \end&#123;aligned&#125; $$</code></p>
+<p>where <span class="math inline">\(E_i\)</span></p>
+<p><code>$$ E_1 = \begin&#123;bmatrix&#125; 1 &amp; 0 &amp; ...&amp;0\\ -\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125; &amp; 1 &amp; ...&amp;0 \\ -\frac&#123;a_&#123;31&#125;&#125;&#123;a_&#123;11&#125;&#125;&amp;0&amp;1...&amp;0\\ ...\\ -\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125;&amp;..&amp;&amp;1 \end&#123;bmatrix&#125; $$</code></p>
+<p><code>$$ E_2 = \begin&#123;bmatrix&#125; 1 &amp; 0 &amp; ...&amp;0\\ 0 &amp; 1 &amp; ...&amp;0 \\ 0&amp; -\frac&#123;a_&#123;32&#125;-a_&#123;12&#125; \frac&#123;a_&#123;31&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&#123;a_&#123;22&#125;-a_&#123;12&#125; \frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;  &amp;1...&amp;0\\ ...\\ 0&amp;-\frac&#123;a_&#123;n 2&#125;-a_&#123;12&#125; \frac&#123;a_&#123;n 1&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&#123;a_&#123;22&#125;-a_&#123;12&#125; \frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&amp;&amp;1 \end&#123;bmatrix&#125; $$</code></p>
+<p>...</p>
+<p>are lower triangular matrix that eliminates the element in one
+column. The inverse of a lower triangular matrix is still lower
+triangular matrix, so A can be decomposed as <span
+class="math inline">\(A = LU\)</span> where <span
+class="math inline">\(L\)</span> is a lower triangular matrix and <span
+class="math inline">\(U\)</span> is an upper triangular matrix. However,
+what if in this process an element on the diagonal (for example at row
+i) is zero? We are sure that there would be a row (row &gt; i) that has
+non-zero at col i (otherwise A is not invertable). We then exchange this
+two rows using a perturbation matrix <span
+class="math inline">\(P_i\)</span> that reorders the rows of A.</p>
+<p><code>$$ ...E_iP(i, s_i)...A = ...E_iP(i, s_i)...b $$</code></p>
+<p>For every row, we can exchange two rows using <span
+class="math inline">\(P_i\)</span> such that the current row i has the
+largest absolute value of i th column element. This is called
+"Pivoting". It can be proved(<a
+href="https://link.zhihu.com/?target=https%3A//www.amazon.com/Numerical-Linear-Algebra-Lloyd-Trefethen/dp/0898713617">https://link.zhihu.com/?target=https%3A//www.amazon.com/Numerical-Linear-Algebra-Lloyd-Trefethen/dp/0898713617</a>)
+that</p>
+<p><code>$$ PA = LU $$</code></p>
+<p>where</p>
+<p><code>$$ P=P\left(n-1, s_&#123;n-1&#125;\right) \ldots P\left(2, s_&#123;2&#125;\right) P\left(1, s_&#123;1&#125;\right) $$</code></p>
+<p>The first step uses <span class="math inline">\(2n(n-1)\)</span>
+operations (multiplication + addition = 2 floating-point operations),
+the second uses <span class="math inline">\(2(n-1)(n-2)\)</span>... so
+Step 1 uses ~ <span class="math inline">\(O(2n^3/3)\)</span></p>
+<p>Step 2:</p>
+<p>Now we can solve <span class="math inline">\(x_n\)</span> using <span
+class="math inline">\(u_{nn}x_n = \widetilde{b_n}\)</span>. Then we plug
+<span class="math inline">\(x_n\)</span> to the second last row we can
+solve <span class="math inline">\(x_{n-1}\)</span>, and so on... by back
+substitution we can solve <span class="math inline">\(Ub =
+\widetilde{b}\)</span> in <span
+class="math inline">\(O(n^2)\)</span></p>
+<h2 id="lu-decomposition">LU decomposition</h2>
+<p>We have seen that an invertable matrix A can be decomposed to <span
+class="math inline">\((P^{T})LU\)</span>. How can we get <span
+class="math inline">\(P, L, U\)</span>?</p>
+<h3 id="by-gauss-elimination">By Gauss elimination</h3>
+<p>From Gauss elimination we know
+<code>$$ L = E^&#123;-1&#125;_1E^&#123;-1&#125;_2...E^&#123;-1&#125;_n $$</code></p>
+<p>And we can get <span class="math inline">\(L\)</span> by
+multiplication and inverse of these lower triangular matrices. Note that
+for lower triangular matrices <span class="math inline">\(E_i\)</span>
+with diagnal element 1, the inverse and multiplication is quite simple,
+and we can build <span class="math inline">\(L\)</span> with <span
+class="math inline">\(E_i\)</span>(<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/84210687">https://zhuanlan.zhihu.com/p/84210687</a>).
+Thus the complexity of LU decomposition and solve this linear equation
+is</p>
+<ol type="1">
+<li><p>LU decomposition: <span
+class="math inline">\(2n^2/3\)</span></p></li>
+<li><p>Solve <span class="math inline">\(Ly = b\)</span>: <span
+class="math inline">\(n^2\)</span></p></li>
+<li><p>Solve <span class="math inline">\(Ux = y\)</span>: <span
+class="math inline">\(n^2\)</span></p></li>
+</ol>
+<p>We use LU decomposition but not Gauss elimination because we don't
+want to bother to modify <span class="math inline">\(b\)</span> every
+time, especially when we have many different <span
+class="math inline">\(b\)</span></p>
+<h3 id="by-recursion">By recursion</h3>
+<p>???</p>
+<h2 id="lup-decomposition">LUP decomposition</h2>
+<p>Every time we left-multiply a perturbation matrix <span
+class="math inline">\(P\)</span> and get</p>
+<p><code>$$ E_&#123;n-1&#125; P_&#123;n-1&#125; \ldots E_&#123;2&#125; P_&#123;2&#125; E_&#123;1&#125; P_&#123;1&#125; A=U $$</code>
+=&gt;
+<code>$$ PA = LU,\text &#123; where &#125; P=\prod_&#123;i=1&#125;^&#123;n-1&#125; P_&#123;i&#125; $$</code></p>
+<p>Though swapping two rows each time, the complexity is still <span
+class="math inline">\(O(2n^3/3)\)</span>
+(我觉得好像是这样...最多多出来<span
+class="math inline">\(O(n^2)\)</span>次操作...)</p>
+<h3 id="by-recursion-1">By recursion</h3>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2022/05/30/cla/">
+    <time datetime="2022-05-29T16:00:00.000Z" class="entry-date">
+        2022-05-30
+    </time>
+</a>
+    
+  <span class="article-delim">&#8226;</span>
+  <div class="article-category">
+  <a class="article-category-link" href="/categories/Math/">Math</a>
+  </div>
+
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2022/06/30/ACE+TAO/" rel="prev"><span class="meta-nav">←</span> ACE+TAO+OpenDDS安装</a></span>
+    
+    
+        <span class="nav-next"><a href="/2022/04/14/KMP/" rel="next">KMP算法 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-graphics/">Computer graphics</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Debug/">Debug</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Knowledge/">Knowledge</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lecture-notes/">Lecture notes</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Math/">Math</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%9B%E4%BD%9C/">创作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%9F%E8%AF%9D/">废话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9/">玩</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%91%E5%9B%A2/">跑团</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2024/01/27/story/">故事</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/19/diary/">正经人谁写日记啊</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/17/coc/">跑团Replay观看记录</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/02/cs440/">CS440 Rendering Engine</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/02/hair/">Hair Rendering</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2024 Axiwa
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

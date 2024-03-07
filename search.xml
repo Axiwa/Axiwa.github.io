@@ -53,6 +53,244 @@
     </entry>
     
     
+    
+    <entry>
+      <title>CS440 Rendering Engine</title>
+      <link href="/2023/04/02/cs440/"/>
+      <url>/2023/04/02/cs440/</url>
+      
+      
+      <categories>
+          
+          <category> Project </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hair Rendering</title>
+      <link href="/2023/04/02/hair/"/>
+      <url>/2023/04/02/hair/</url>
+      
+      
+      <categories>
+          
+          <category> Computer graphics </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Euler Angle - Quaternion - Axis Angle</title>
+      <link href="/2023/04/02/rotation/"/>
+      <url>/2023/04/02/rotation/</url>
+      
+      
+      <categories>
+          
+          <category> Computer graphics </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Scala notes</title>
+      <link href="/2023/04/02/scalaReview/"/>
+      <url>/2023/04/02/scalaReview/</url>
+      
+      
+      <categories>
+          
+          <category> Lecture notes </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CS449 notes</title>
+      <link href="/2023/04/02/systemsForDataScience/"/>
+      <url>/2023/04/02/systemsForDataScience/</url>
+      
+      
+      <categories>
+          
+          <category> Lecture notes </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Vulkan学习(1) Basics</title>
+      <link href="/2023/04/02/VulkanBasic/"/>
+      <url>/2023/04/02/VulkanBasic/</url>
+      
+      
+      <categories>
+          
+          <category> Computer graphics </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>随机数和图形学</title>
+      <link href="/2022/12/10/randomNumber/"/>
+      <url>/2022/12/10/randomNumber/</url>
+      
+      
+      <categories>
+          
+          <category> Computer graphics </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>My stackoverflow</title>
+      <link href="/2022/09/12/remember%20sth/"/>
+      <url>/2022/09/12/remember%20sth/</url>
+      
+      
+      <categories>
+          
+          <category> Debug </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ACE+TAO+OpenDDS安装</title>
+      <link href="/2022/06/30/ACE+TAO/"/>
+      <url>/2022/06/30/ACE+TAO/</url>
+      
+      
+      <categories>
+          
+          <category> Debug </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>LU分解、Chelosky分解、QR分解</title>
+      <link href="/2022/05/30/cla/"/>
+      <url>/2022/05/30/cla/</url>
+      
+      
+      <categories>
+          
+          <category> Math </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>KMP算法</title>
+      <link href="/2022/04/14/KMP/"/>
+      <url>/2022/04/14/KMP/</url>
+      
+      
+      <categories>
+          
+          <category> Algorithm </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>刷题</title>
+      <link href="/2022/04/14/lc/"/>
+      <url>/2022/04/14/lc/</url>
+      
+      
+      <categories>
+          
+          <category> Algorithm </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Monad</title>
+      <link href="/2022/04/14/Monads/"/>
+      <url>/2022/04/14/Monads/</url>
+      
+      
+      <categories>
+          
+          <category> Knowledge </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>How to create a blog by hexo&amp;github</title>
+      <link href="/2021/11/02/How-to-create-a-blog/"/>
+      <url>/2021/11/02/How-to-create-a-blog/</url>
+      
+      
+      <categories>
+          
+          <category> 玩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
   
   
 </search>

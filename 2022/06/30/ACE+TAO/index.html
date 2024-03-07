@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="Silent site" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>ACE+TAO+OpenDDS安装 | Azure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我需要用OpenDDS进行实时的数据处理，使用前要benchmark一下，因此想用自带的performance-tests 系统 Ubuntu 20.04 OpenDDS-3.20 ACE+TAO-7.0.7 官网： 最简安装，不需要自己下载编译ACE+TAO，不指定任何configure option。简而言之：下载，解压，进入解压的OpenDDS目录，.&#x2F;configure，make，sour">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ACE+TAO+OpenDDS安装">
+<meta property="og:url" content="http://axiwa.github.io/2022/06/30/ACE+TAO/index.html">
+<meta property="og:site_name" content="Azure">
+<meta property="og:description" content="我需要用OpenDDS进行实时的数据处理，使用前要benchmark一下，因此想用自带的performance-tests 系统 Ubuntu 20.04 OpenDDS-3.20 ACE+TAO-7.0.7 官网： 最简安装，不需要自己下载编译ACE+TAO，不指定任何configure option。简而言之：下载，解压，进入解压的OpenDDS目录，.&#x2F;configure，make，sour">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-06-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-07T09:23:02.912Z">
+<meta property="article:author" content="Axiwa">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="https://axiwa.github.io" title="Azure" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Azure" rel="home">Azure</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        Silent site
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">MENU</button>
+            <a class="assistive-text" href="/#content" title="JUMP TO">JUMP TO/a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-ACE+TAO" class="post-ACE+TAO post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      ACE+TAO+OpenDDS安装
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://axiwa.github.io/2022/06/30/ACE+TAO/" data-id="clth0sdw30000xzcualf003ai" class="leave-reply bdsharebuttonbox" data-cmd="more"></a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>我需要用OpenDDS进行实时的数据处理，使用前要benchmark一下，因此想用自带的performance-tests</p>
+<p>系统 Ubuntu 20.04</p>
+<p>OpenDDS-3.20</p>
+<p>ACE+TAO-7.0.7</p>
+<p><strong>官网：</strong></p>
+<p>最简安装，不需要自己下载编译ACE+TAO，不指定任何configure
+option。简而言之：下载，解压，进入解压的OpenDDS目录，<code>./configure</code>，<code>make</code>，<code>source setenv.sh</code>
+设置环境，测试，成功！</p>
+<p><a
+target="_blank" rel="noopener" href="https://opendds.org/quickstart/GettingStartedLinux.html">https://opendds.org/quickstart/GettingStartedLinux.html</a></p>
+<p>官方Github的文档，告诉你需要什么feature都告诉configure。比如java支持啊，需要自带tests啊，实际的参数都请去相应的文档查阅</p>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/objectcomputing/OpenDDS/blob/master/INSTALL.md">https://github.com/objectcomputing/OpenDDS/blob/master/INSTALL.md</a></p>
+<hr />
+<p>Make life easier:</p>
+<p>configure支持的输入用 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+CXX标准似乎默认是std=c++11，不放心也可以加上<code>--std=c++11</code></p>
+<p><code>--tests</code>
+如果是官网下载解压的文件夹，<code>./configure --tests</code>会报错，请你用
+<code>--gtest=???</code>
+指定googletest的根目录。比如googletest解压之后有了这个<code>/usr/local/include/gtest</code>，那么<code>--gtest=/usr/local</code>。如果是Github下载的文件夹，终端
+<code>git submodule init</code> +
+<code>git submodule update</code>，再用<code>--tests</code>即可。具体文档：<code>$DDS_ROOT/tests/gtest_setup.txt</code></p>
+<p><strong>网友：</strong></p>
+<p>ACE+TAO自行安装编译</p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/mrliushuaishuai/article/details/118633577">Linux系统下OpenDDS安装及测试2021-07-10</a></p>
+<p>感谢网友的保姆级教程！唯一的问题是我不知道在哪指定<code>no_cxx11=0</code>导致无法手动在tests中build，以及不小心指定了<code>make -B</code>以后所有可以make的全部make，不管怎么<code>make clean</code>也调不回来，一整天也没完成
+T_T...</p>
+<hr />
+<p>Make life easier:</p>
+<p>如果不按照教程里新建<code>$ACE_ROOT/ace/config.h</code>和<code>$ACE_ROOT/include/makeinclude/platform_macros.GNU</code>，仅仅下载，解压，改权限，添加环境变量，然后直接在<code>$DDS_ROOT</code>中<code>./configure</code>的话，将会由它自动添加和修改，可以解决没有用C++11的问题。来自
+<a target="_blank" rel="noopener" href="https://github.com/objectcomputing/OpenDDS/issues/1842">My
+system refuses to configure with c++11 #1842</a></p>
+<p>不想无休止地给ACE和TAO的测试目录make怎么办？参考<code>$TAO_ROOT/TAO-INSTALL.html</code>中“On
+UNIX platforms”第4条，重新生成吧</p>
+<p>自己怎么指定CXX？ To be continued...</p>
+<p><strong>运行测试</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$DDS_ROOT</span>/tests</span><br><span class="line">./auto_run_tests.pl </span><br></pre></td></tr></table></figure> test
+PASSED真是无论何时都那么令人心旷神怡啊</p>
+<p><strong>性能测试</strong></p>
+<p><a
+target="_blank" rel="noopener" href="https://opendds.readthedocs.io/en/latest/internal/bench2.html">https://opendds.readthedocs.io/en/latest/internal/bench2.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2022/06/30/ACE+TAO/">
+    <time datetime="2022-06-29T16:00:00.000Z" class="entry-date">
+        2022-06-30
+    </time>
+</a>
+    
+  <span class="article-delim">&#8226;</span>
+  <div class="article-category">
+  <a class="article-category-link" href="/categories/Debug/">Debug</a>
+  </div>
+
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2022/09/12/remember%20sth/" rel="prev"><span class="meta-nav">←</span> My stackoverflow</a></span>
+    
+    
+        <span class="nav-next"><a href="/2022/05/30/cla/" rel="next">LU分解、Chelosky分解、QR分解 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-graphics/">Computer graphics</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Debug/">Debug</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Knowledge/">Knowledge</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lecture-notes/">Lecture notes</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Math/">Math</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%9B%E4%BD%9C/">创作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%9F%E8%AF%9D/">废话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9/">玩</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%91%E5%9B%A2/">跑团</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2024/01/27/story/">故事</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/19/diary/">正经人谁写日记啊</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/17/coc/">跑团Replay观看记录</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/02/cs440/">CS440 Rendering Engine</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/02/hair/">Hair Rendering</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2024 Axiwa
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
