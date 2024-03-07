@@ -22,27 +22,31 @@
 <meta property="og:site_name" content="Azure">
 <meta property="og:description" content="基于PBRT的离线渲染引擎，基本框架是Nori. What we have done in this course and project is to extend this basic renderer to support more full-fledged physically-based lighting&#x2F;integrating&#x2F;bsdf functions... The technica">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/proposal.jpg">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/sky.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/final.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/modeling.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/text_ref.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/textrec_ref.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/homo.jpg">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/sphere_ref.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/room_ref.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/grassland.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/sphere_blender.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/sphere_two.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/instance.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/bvh.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/memory_peak.png">
-<meta property="og:image" content="http://axiwa.github.io/2023/04/images/memory_render.png">
+<meta property="og:image" content="http://axiwa.github.io/images/proposal.jpg">
+<meta property="og:image" content="http://axiwa.github.io/images/sky.png">
+<meta property="og:image" content="http://axiwa.github.io/images/final.png">
+<meta property="og:image" content="http://axiwa.github.io/images/modeling.png">
+<meta property="og:image" content="http://axiwa.github.io/images/pose.png">
+<meta property="og:image" content="http://axiwa.github.io/images/text_ref.png">
+<meta property="og:image" content="http://axiwa.github.io/images/text.png">
+<meta property="og:image" content="http://axiwa.github.io/images/textrec_ref.png">
+<meta property="og:image" content="http://axiwa.github.io/images/homo.jpg">
+<meta property="og:image" content="http://axiwa.github.io/images/sphere_ref.png">
+<meta property="og:image" content="http://axiwa.github.io/images/room_ref.png">
+<meta property="og:image" content="http://axiwa.github.io/images/room.png">
+<meta property="og:image" content="http://axiwa.github.io/images/withfog.png">
+<meta property="og:image" content="http://axiwa.github.io/images/grassland.png">
+<meta property="og:image" content="http://axiwa.github.io/images/sphere_blender.png">
+<meta property="og:image" content="http://axiwa.github.io/images/sphere_two.png">
+<meta property="og:image" content="http://axiwa.github.io/images/instance.png">
+<meta property="og:image" content="http://axiwa.github.io/images/bvh.png">
+<meta property="og:image" content="http://axiwa.github.io/images/memory_peak.png">
+<meta property="og:image" content="http://axiwa.github.io/images/memory_render.png">
 <meta property="article:published_time" content="2023-04-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-07T09:23:25.329Z">
+<meta property="article:modified_time" content="2024-03-07T10:47:20.915Z">
 <meta property="article:author" content="Axiwa">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://axiwa.github.io/2023/04/images/proposal.jpg">
+<meta name="twitter:image" content="http://axiwa.github.io/images/proposal.jpg">
   
     <link rel="alternative" href="https://axiwa.github.io" title="Azure" type="application/atom+xml">
   
@@ -102,7 +106,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://axiwa.github.io/2023/04/02/cs440/" data-id="clth0sv6t0006xzcudfidh599" class="leave-reply bdsharebuttonbox" data-cmd="more"></a>
+            <a href="javascript:void(0);" data-url="http://axiwa.github.io/2023/04/02/cs440/" data-id="clth3ghg7000vg2cu7v86csr4" class="leave-reply bdsharebuttonbox" data-cmd="more"></a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -124,19 +128,18 @@ Homogeneous participating media and Object instancing.</p>
 would like to show the loop of death and rebirth using a vibrant scene
 next to a discarded robot. Butterfly also means rebirth in some
 culture.</p>
-<p>Motivational image: <img src="../../images/proposal.jpg" /></p>
+<p>Motivational image: <img src="/images/proposal.jpg" /></p>
 <p><em>Tales from the Loop</em> by Simon Stalenhag</p>
-<p><img src="../../images/sky.png" /></p>
+<p><img src="/images/sky.png" /></p>
 <p><em>Castle in the Sky</em> by Tokuma Shoten</p>
 <h1 id="final-render">Final Render</h1>
-<p><img src="../../images/final.png" /></p>
+<p><img src="/images/final.png" /></p>
 <h1 id="feature-1-3d-mesh-design">Feature 1 3D Mesh Design</h1>
 <p><strong>Description</strong></p>
 <p>I used the image from animation to model 3D meshes in Blender and
 gave them a pose. The mesh that I modeled are the robot and grass, and a
 tree that is used to generate god ray but not presents in the scene.</p>
-<p><img src="../../images/modeling.png" /> <img
-src="../../images/pose.png" /></p>
+<p><img src="/images/modeling.png" /> <img src="/images/pose.png" /></p>
 <h1 id="feature-2-textures">Feature 2 Textures</h1>
 <p><strong>Description</strong></p>
 <p>Without textures we cannot present a colorful world. The basic idea
@@ -155,7 +158,10 @@ picture instead of an default albedo.</p>
 are actually "portion" between 0 and 1, we need to use this value and
 the size of the reference picture to get the absolute coordinate in
 it.</p>
-<p><code>$$ \begin&#123;aligned&#125; x = u * width \\ y = v * height \end&#123;aligned&#125; $$</code></p>
+<p><span class="math display">\[
+x = u * width \\
+y = v * height
+\]</span></p>
 <p>We create a <strong>Texture</strong> class to store the image
 information, including the name, size and the address of the imported
 image. The public methods includes the constructor which receives a path
@@ -187,15 +193,14 @@ coordinates and export it, then test it in our renderer.</p>
 </ol>
 <p>The upper one is rendered by Blender. The texture picture is a
 4-channel "color.png"</p>
-<p><img src="../../images/text_ref.png" /><img
-src="../../images/text.png" /></p>
+<p><img src="/images/text_ref.png" /><img src="/images/text.png" /></p>
 <ol start="2" type="1">
 <li>Rectengular picture</li>
 </ol>
 <p>The upper one is rendered by Blender. The texture picture is a
 3-channel "blue.jpg"</p>
-<p><img src="../../images/textrec_ref.png" /><img
-src="../../images/textrec.png" /></p>
+<p><img src="/images/textrec_ref.png" /><img
+src="/images/textrec.png" /></p>
 <h1 id="feature-3-homogeneous-media">Feature 3 Homogeneous media</h1>
 <p><strong>Description</strong></p>
 <p>There are many ways to implement homogeneous participating media. We
@@ -204,7 +209,17 @@ the ray has a probability that continue to travel, or scatter (which
 means the next interaction happens).</p>
 <p>If we don't consider the emission, the volume rendering equation is
 like this:</p>
-<p><code>$$ \begin&#123;aligned&#125; L(\mathbf&#123;x&#125;, \vec&#123;\omega&#125;) &amp;=T_&#123;r&#125;\left(\mathbf&#123;x&#125;, \mathbf&#123;x&#125;_&#123;z&#125;\right) L\left(\mathbf&#123;x&#125;_&#123;z&#125;, \vec&#123;\omega&#125;\right) \\ &amp;+\int_&#123;0&#125;^&#123;z&#125; T_&#123;r&#125;\left(\mathbf&#123;x&#125;, \mathbf&#123;x&#125;_&#123;t&#125;\right) \sigma_&#123;s&#125;\left(\mathbf&#123;x&#125;_&#123;t&#125;\right) \int_&#123;S^&#123;2&#125;&#125; f_&#123;p&#125;\left(\mathbf&#123;x&#125;_&#123;t&#125;, \vec&#123;\omega&#125;^&#123;\prime&#125;, \vec&#123;\omega&#125;\right) L_&#123;i&#125;\left(\mathbf&#123;x&#125;_&#123;t&#125;, \vec&#123;\omega&#125;^&#123;\prime&#125;\right) d \vec&#123;\omega&#125;^&#123;\prime&#125; d t \end&#123;aligned&#125; $$</code></p>
+<p><span class="math display">\[
+\begin{aligned}
+L(\mathbf{x}, \vec{\omega}) &amp;=T_{r}\left(\mathbf{x},
+\mathbf{x}_{z}\right) L\left(\mathbf{x}_{z}, \vec{\omega}\right) \\
+&amp;+\int_{0}^{z} T_{r}\left(\mathbf{x}, \mathbf{x}_{t}\right)
+\sigma_{s}\left(\mathbf{x}_{t}\right) \int_{S^{2}}
+f_{p}\left(\mathbf{x}_{t}, \vec{\omega}^{\prime}, \vec{\omega}\right)
+L_{i}\left(\mathbf{x}_{t}, \vec{\omega}^{\prime}\right) d
+\vec{\omega}^{\prime} d t
+\end{aligned}
+\]</span></p>
 <p>Where <code>$L\left(\mathbf&#123;x&#125;_&#123;z&#125;, \vec&#123;\omega&#125;\right)$</code> is
 the radiance background surface radiance, and the second term is the
 accumulated in-scattered radiance. We calculate the integral by
@@ -216,7 +231,7 @@ class="math inline">\(\int_{S^2}...d\omega\)</span> we use the phase
 function to give the next direction and corresponding probability. I use
 the graph below to show my path tracer. I assume that there is no
 emitter inside the medium</p>
-<p><img src="../../images/homo.jpg" /></p>
+<p><img src="/images/homo.jpg" /></p>
 <p><strong>Design choice</strong></p>
 <p>As the figure shows, we need to consider different situations. I will
 follow the code logic to explain each of them. In my implementation the
@@ -298,8 +313,8 @@ pointer to determine the location of the ray, it does not handle the
 case where the light and the boundary are almost tangent/interleaved
 mesh and volume very well.</p>
 <p>The upper is the scene rendered by Blender <code>cycles</code>.</p>
-<p><img src="../../images/sphere_ref.png" /><img
-src="../../images/sphere_empty.png" /></p>
+<p><img src="/images/sphere_ref.png" /><img
+src="/images/sphere_empty.png" /></p>
 <ol start="2" type="1">
 <li>God ray test</li>
 </ol>
@@ -308,10 +323,8 @@ renderer uses 1024 samples/pixel. There are still some problems
 regarding how to determine what kind of interaction is, so the wall
 cannot be too close to the volume. The difference may be because the
 parameters are different.</p>
-<p><img src="../../images/room_ref.png" /><img
-src="../../images/room.png" /></p>
-<p>The scene with and without fog: <img
-src="../../images/withfog.png" /></p>
+<p><img src="/images/room_ref.png" /><img src="/images/room.png" /></p>
+<p>The scene with and without fog: <img src="/images/withfog.png" /></p>
 <ol start="3" type="1">
 <li>Numerical validation?</li>
 </ol>
@@ -394,10 +407,20 @@ here is that the transform matrix should be transformed itself due to
 the <code>nori</code>'s strange perspective, which has a coordinate of
 (x, -z, y). From linear algebra we know the transform we need is a <span
 class="math inline">\(4 \times 4\)</span> matrix</p>
-<p><code>$$  P =  \begin&#123;bmatrix&#125; 1 &amp;  &amp;  &amp; \\   &amp;  &amp; -1 &amp; \\   &amp; 1 &amp;  &amp; \\   &amp;  &amp;  &amp; 1 \end&#123;bmatrix&#125;  $$</code></p>
+<p><span class="math display">\[
+P =
+\begin{bmatrix}
+1 &amp;  &amp;  &amp; \\
+&amp;  &amp; -1 &amp; \\
+&amp; 1 &amp;  &amp; \\
+&amp;  &amp;  &amp; 1
+\end{bmatrix}
+\]</span></p>
 <p>and we apply it to the matrix we get from <code>matrix_world</code>
 <span class="math inline">\(T\)</span></p>
-<p><code>$$ P^&#123;\top&#125;TP $$</code></p>
+<p><span class="math display">\[
+P^{\top}TP
+\]</span></p>
 <p>Then we can get a correct transform matrix, and the export plugin
 will generate a <code>tmesh</code> object like this</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mesh</span> <span class="attr">type</span>=<span class="string">&quot;tmesh&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">&quot;filename&quot;</span> <span class="attr">value</span>=<span class="string">&quot;meshes/big.obj&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">transform</span> <span class="attr">name</span>=<span class="string">&quot;toWorld&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">matrix</span> <span class="attr">value</span>=<span class="string">&quot;1.5,0.0,0.0,0.0,0.0,1.5,0.0,0.0,0.0,0.0,1.5,1.0,0.0,0.0,0.0,1.0&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">transform</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mesh</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -406,21 +429,21 @@ will generate a <code>tmesh</code> object like this</p>
 <code>tmesh</code> mesh description, we should manually move the tmesh
 part into its corrsponding parent, like this:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mesh</span> <span class="attr">type</span>=<span class="string">&quot;obj&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">&quot;filename&quot;</span> <span class="attr">value</span>=<span class="string">&quot;meshes/small.obj&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bsdf</span> <span class="attr">type</span>=<span class="string">&quot;diffuse&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">&quot;albedo&quot;</span> <span class="attr">value</span>=<span class="string">&quot;0.800000011920929,0.800000011920929,0.800000011920929&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bsdf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mesh</span> <span class="attr">type</span>=<span class="string">&quot;tmesh&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">&quot;filename&quot;</span> <span class="attr">value</span>=<span class="string">&quot;meshes/big.obj&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">transform</span> <span class="attr">name</span>=<span class="string">&quot;toWorld&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">matrix</span> <span class="attr">value</span>=<span class="string">&quot;1.5,0.0,0.0,0.0,0.0,1.5,0.0,0.0,0.0,0.0,1.5,1.0,0.0,0.0,0.0,1.0&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">transform</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mesh</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mesh</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="../../images/grassland.png" /></p>
+<p><img src="/images/grassland.png" /></p>
 <p><strong>Validation</strong></p>
 <ol type="1">
 <li>Two objects vs one object with a transformed tmesh</li>
 </ol>
 <p>In blender the real scence is like this:</p>
-<p><img src="../../images/sphere_blender.png" /></p>
+<p><img src="/images/sphere_blender.png" /></p>
 <p>where the big ball has a transform of scale and displacement in y
 direction with respect to the small one, and the small ball has applied
 all the transform (identity matrix).</p>
 <p>We use the example above to render using two objects (small.obj &amp;
 big.obj) or only use the small ball and a transform of it.</p>
 <p>We can get the same output</p>
-<p><img src="../../images/sphere_two.png" /><img
-src="../../images/sphere_one.png" /></p>
+<p><img src="/images/sphere_two.png" /><img
+src="/images/sphere_one.png" /></p>
 <p>The actual transform is that the big ball is twice the size of small
 ball, and then translate 1.5m in the negative direction of the y-axis.
 However, from the transform matrix we could see the translation is at z
@@ -434,13 +457,13 @@ otherwise the matrix we get is not correct.</p>
 "leave_origin", 10000 "furry", 3000 "shrub_sorrel_01_d", 3000
 "shrub_sorrel_01_b", 1000 "Grashalm.002" and other meshes, so the
 roughly memory should be about 8.3 G only for mesh itself.</p>
-<p><img src="../../images/instance.png" /></p>
+<p><img src="/images/instance.png" /></p>
 <p>The constructing of BVH uses up to 13.7 GB.</p>
-<p><img src="../../images/bvh.png" /></p>
+<p><img src="/images/bvh.png" /></p>
 <p>From the <code>ps v</code> command, we could see the memory used at
 constructing stage (11 GB) and rendering stage (4.7 GB):</p>
-<p><img src="../../images/memory_peak.png" /></p>
-<p><img src="../../images/memory_render.png" /></p>
+<p><img src="/images/memory_peak.png" /></p>
+<p><img src="/images/memory_render.png" /></p>
 <p>Therefore the object instancing works.</p>
 <h1 id="碎碎念">碎碎念</h1>
 <p>Before this course I didn't know coding and art can be so perfectly
@@ -473,10 +496,10 @@ point都不做.... Anyway，stay determined, Axiwa! 👩‍💻</p>
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <span class="nav-previous"><a href="/2023/06/17/coc/" rel="prev"><span class="meta-nav">←</span> 跑团Replay观看记录</a></span>
+        <span class="nav-previous"><a href="/2023/04/02/rotation/" rel="prev"><span class="meta-nav">←</span> Euler Angle - Quaternion - Axis Angle</a></span>
     
     
-        <span class="nav-next"><a href="/2023/04/02/hair/" rel="next">Hair Rendering <span class="meta-nav">→</span></a></span>
+        <span class="nav-next"><a href="/2023/04/02/scalaReview/" rel="next">Scala notes <span class="meta-nav">→</span></a></span>
     
 </nav><!-- .nav-single -->
 
@@ -507,11 +530,11 @@ point都不做.... Anyway，stay determined, Axiwa! 👩‍💻</p>
       <ul>
         
           <li>
-            <a href="/2024/01/27/story/">故事</a>
+            <a href="/2024/03/07/diary/">正经人谁写日记啊</a>
           </li>
         
           <li>
-            <a href="/2023/06/19/diary/">正经人谁写日记啊</a>
+            <a href="/2024/01/27/story/">故事</a>
           </li>
         
           <li>
@@ -519,7 +542,7 @@ point都不做.... Anyway，stay determined, Axiwa! 👩‍💻</p>
           </li>
         
           <li>
-            <a href="/2023/04/02/cs440/">CS440 Rendering Engine</a>
+            <a href="/2023/04/02/VulkanBasic/">Vulkan学习(1) Basics</a>
           </li>
         
           <li>

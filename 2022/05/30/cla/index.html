@@ -23,7 +23,7 @@
 <meta property="og:description" content="花式解决\(Ax &#x3D; b\)">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-07T09:23:09.313Z">
+<meta property="article:modified_time" content="2024-03-07T10:45:01.134Z">
 <meta property="article:author" content="Axiwa">
 <meta name="twitter:card" content="summary">
   
@@ -85,7 +85,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://axiwa.github.io/2022/05/30/cla/" data-id="clth0sitv0003xzcu7ki5fym4" class="leave-reply bdsharebuttonbox" data-cmd="more"></a>
+            <a href="javascript:void(0);" data-url="http://axiwa.github.io/2022/05/30/cla/" data-id="clth3ghfx0007g2cucua3g09c" class="leave-reply bdsharebuttonbox" data-cmd="more"></a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -100,24 +100,128 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/bigmonkey/p/9555710
 target="_blank" rel="noopener" href="https://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/matrix-solve.html">线性方程组求解与LU分解</a></p>
 <h2 id="gauss-elimination">Gauss Elimination</h2>
 <p>Suppose we have a set of linear equations:</p>
-<p><code>$$ \begin&#123;bmatrix&#125; a_&#123;11&#125; &amp; a_&#123;12&#125; &amp; .. &amp; a_&#123;1n&#125; \\ a_&#123;21&#125; &amp; a_&#123;22&#125; &amp; .. &amp; .. \\ .. &amp;  &amp;  &amp;  \\  &amp;  &amp;  &amp; a_&#123;nn&#125; \\ \end&#123;bmatrix&#125;\begin&#123;bmatrix&#125;  x_1\\  x_2\\  ..\\ x_n \end&#123;bmatrix&#125; = \begin&#123;bmatrix&#125;  b_1\\  b_2\\  ..\\ b_n \end&#123;bmatrix&#125; $$</code></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; .. &amp; .. \\
+.. &amp;  &amp;  &amp;  \\
+&amp;  &amp;  &amp; a_{nn} \\
+\end{bmatrix}\begin{bmatrix}
+x_1\\
+x_2\\
+..\\
+x_n
+\end{bmatrix}
+= \begin{bmatrix}
+b_1\\
+b_2\\
+..\\
+b_n
+\end{bmatrix}
+\]</span></p>
 <p>The most brute force way is to eliminate one variable each row from
 top to bottom, and then plug in the sovled variable to previous ones
 from bottom to top. It is something like this:</p>
 <p>Step 1: Let each row except 1st do not contain <span
 class="math inline">\(x_1\)</span>. Then eliminate <span
 class="math inline">\(x_2\)</span> in each row except 1st and 2nd</p>
-<p><code>$$ \begin&#123;bmatrix&#125; a_&#123;11&#125; &amp; a_&#123;12&#125; &amp; .. &amp; a_&#123;1n&#125; \\ 0 &amp; a_&#123;22&#125;-a_&#123;12&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125; &amp; .. &amp; .. \\ .. &amp;  &amp;  &amp;  \\ 0 &amp;  &amp;  &amp; a_&#123;nn&#125;-a_&#123;1n&#125;\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125; \\ \end&#123;bmatrix&#125;\begin&#123;bmatrix&#125;  x_1\\  x_2\\  ..\\ x_n \end&#123;bmatrix&#125; = \begin&#123;bmatrix&#125;  b_1\\  b_2-b_1\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;\\  ..\\ b_n-b_1\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125; \end&#123;bmatrix&#125; $$</code></p>
-<p><code>$$ \begin&#123;bmatrix&#125; a_&#123;11&#125; &amp; a_&#123;12&#125; &amp; .. &amp; a_&#123;1n&#125; \\ 0 &amp; a_&#123;22&#125;-a_&#123;12&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125; &amp; .. &amp; .. \\ 0 &amp; 0 &amp; a_&#123;33&#125;-a_&#123;13&#125;\frac&#123;a_&#123;31&#125;&#125;&#123;a_&#123;11&#125;&#125;-(a_&#123;23&#125;-a_&#123;13&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;)\frac&#123;a_&#123;32&#125;-a_&#123;12&#125;\frac&#123;a_&#123;31&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&#123;a_&#123;22&#125;-a_&#123;12&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125; &amp;  \\ .. &amp; .. &amp;  &amp;  \\ 0 &amp; 0 &amp;  &amp; a_&#123;nn&#125;-a_&#123;1n&#125;\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125;-(a_&#123;2n&#125;-a_&#123;1n&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;)\frac&#123;a_&#123;n2&#125;-a_&#123;12&#125;\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&#123;a_&#123;22&#125;-a_&#123;12&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125; \\ \end&#123;bmatrix&#125;\begin&#123;bmatrix&#125;  x_1\\  x_2\\  ..\\ x_n \end&#123;bmatrix&#125; $$</code></p>
-<p><code>$$ = \begin&#123;bmatrix&#125;  b_1\\  b_2-b_1\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;\\  ..\\ b_n-b_1\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125;-(b_2-b_1\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;)\frac&#123;a_&#123;n2&#125;-a_&#123;12&#125;\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&#123;a_&#123;22&#125;-a_&#123;12&#125;\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125; \end&#123;bmatrix&#125; $$</code></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\
+0 &amp; a_{22}-a_{12}\frac{a_{21}}{a_{11}} &amp; .. &amp; .. \\
+.. &amp;  &amp;  &amp;  \\
+0 &amp;  &amp;  &amp; a_{nn}-a_{1n}\frac{a_{n1}}{a_{11}} \\
+\end{bmatrix}\begin{bmatrix}
+x_1\\
+x_2\\
+..\\
+x_n
+\end{bmatrix}
+= \begin{bmatrix}
+b_1\\
+b_2-b_1\frac{a_{21}}{a_{11}}\\
+..\\
+b_n-b_1\frac{a_{n1}}{a_{11}}
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\
+0 &amp; a_{22}-a_{12}\frac{a_{21}}{a_{11}} &amp; .. &amp; .. \\
+0 &amp; 0 &amp;
+a_{33}-a_{13}\frac{a_{31}}{a_{11}}-(a_{23}-a_{13}\frac{a_{21}}{a_{11}})\frac{a_{32}-a_{12}\frac{a_{31}}{a_{11}}}{a_{22}-a_{12}\frac{a_{21}}{a_{11}}}
+&amp;  \\
+.. &amp; .. &amp;  &amp;  \\
+0 &amp; 0 &amp;  &amp;
+a_{nn}-a_{1n}\frac{a_{n1}}{a_{11}}-(a_{2n}-a_{1n}\frac{a_{21}}{a_{11}})\frac{a_{n2}-a_{12}\frac{a_{n1}}{a_{11}}}{a_{22}-a_{12}\frac{a_{21}}{a_{11}}}
+\\
+\end{bmatrix}\begin{bmatrix}
+x_1\\
+x_2\\
+..\\
+x_n
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+= \begin{bmatrix}
+b_1\\
+b_2-b_1\frac{a_{21}}{a_{11}}\\
+..\\
+b_n-b_1\frac{a_{n1}}{a_{11}}-(b_2-b_1\frac{a_{21}}{a_{11}})\frac{a_{n2}-a_{12}\frac{a_{n1}}{a_{11}}}{a_{22}-a_{12}\frac{a_{21}}{a_{11}}}
+\end{bmatrix}
+\]</span></p>
 <p>If every time the denominator is not zero, finally we will get an
-upper matrix
-<code>$$ \begin&#123;bmatrix&#125; u_&#123;11&#125; &amp; u_&#123;12&#125; &amp; .. &amp; u_&#123;1n&#125; \\ 0 &amp; u_&#123;22&#125; &amp; .. &amp; .. \\ .. &amp;  &amp;  &amp;  \\ 0 &amp;  &amp;  &amp; u_&#123;nn&#125; \\ \end&#123;bmatrix&#125;\begin&#123;bmatrix&#125;  x_1\\  x_2\\  ..\\ x_n \end&#123;bmatrix&#125; = \begin&#123;bmatrix&#125;  \widetilde&#123;b_1&#125;\\  \widetilde&#123;b_2&#125;\\  ..\\ \widetilde&#123;b_n&#125; \end&#123;bmatrix&#125; $$</code></p>
+upper matrix <span class="math display">\[
+\begin{bmatrix}
+u_{11} &amp; u_{12} &amp; .. &amp; u_{1n} \\
+0 &amp; u_{22} &amp; .. &amp; .. \\
+.. &amp;  &amp;  &amp;  \\
+0 &amp;  &amp;  &amp; u_{nn} \\
+\end{bmatrix}\begin{bmatrix}
+x_1\\
+x_2\\
+..\\
+x_n
+\end{bmatrix}
+= \begin{bmatrix}
+\widetilde{b_1}\\
+\widetilde{b_2}\\
+..\\
+\widetilde{b_n}
+\end{bmatrix}
+\]</span></p>
 <p>This process can be seen as</p>
-<p><code>$$ \begin&#123;aligned&#125; E_1Ax = E_1b \\ E_2E_1Ax = E_2E_1b\\ \cdots \\ E_n..E_1Ax = E_n...E_1b = Ux\\ (E_n...E_1)^&#123;-1&#125;Ux = b \\ LUx = b \end&#123;aligned&#125; $$</code></p>
+<p><span class="math display">\[
+\begin{aligned}
+E_1Ax = E_1b \\
+E_2E_1Ax = E_2E_1b\\
+\cdots \\
+E_n..E_1Ax = E_n...E_1b = Ux\\
+(E_n...E_1)^{-1}Ux = b \\
+LUx = b
+\end{aligned}
+\]</span></p>
 <p>where <span class="math inline">\(E_i\)</span></p>
-<p><code>$$ E_1 = \begin&#123;bmatrix&#125; 1 &amp; 0 &amp; ...&amp;0\\ -\frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125; &amp; 1 &amp; ...&amp;0 \\ -\frac&#123;a_&#123;31&#125;&#125;&#123;a_&#123;11&#125;&#125;&amp;0&amp;1...&amp;0\\ ...\\ -\frac&#123;a_&#123;n1&#125;&#125;&#123;a_&#123;11&#125;&#125;&amp;..&amp;&amp;1 \end&#123;bmatrix&#125; $$</code></p>
-<p><code>$$ E_2 = \begin&#123;bmatrix&#125; 1 &amp; 0 &amp; ...&amp;0\\ 0 &amp; 1 &amp; ...&amp;0 \\ 0&amp; -\frac&#123;a_&#123;32&#125;-a_&#123;12&#125; \frac&#123;a_&#123;31&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&#123;a_&#123;22&#125;-a_&#123;12&#125; \frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;  &amp;1...&amp;0\\ ...\\ 0&amp;-\frac&#123;a_&#123;n 2&#125;-a_&#123;12&#125; \frac&#123;a_&#123;n 1&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&#123;a_&#123;22&#125;-a_&#123;12&#125; \frac&#123;a_&#123;21&#125;&#125;&#123;a_&#123;11&#125;&#125;&#125;&amp;&amp;1 \end&#123;bmatrix&#125; $$</code></p>
+<p><span class="math display">\[
+E_1 = \begin{bmatrix}
+1 &amp; 0 &amp; ...&amp;0\\
+-\frac{a_{21}}{a_{11}} &amp; 1 &amp; ...&amp;0 \\
+-\frac{a_{31}}{a_{11}}&amp;0&amp;1...&amp;0\\
+...\\
+-\frac{a_{n1}}{a_{11}}&amp;..&amp;&amp;1
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+E_2 = \begin{bmatrix}
+1 &amp; 0 &amp; ...&amp;0\\
+0 &amp; 1 &amp; ...&amp;0 \\
+0&amp; -\frac{a_{32}-a_{12} \frac{a_{31}}{a_{11}}}{a_{22}-a_{12}
+\frac{a_{21}}{a_{11}}}  &amp;1...&amp;0\\
+...\\
+0&amp;-\frac{a_{n 2}-a_{12} \frac{a_{n 1}}{a_{11}}}{a_{22}-a_{12}
+\frac{a_{21}}{a_{11}}}&amp;&amp;1
+\end{bmatrix}
+\]</span></p>
 <p>...</p>
 <p>are lower triangular matrix that eliminates the element in one
 column. The inverse of a lower triangular matrix is still lower
@@ -130,16 +234,23 @@ i) is zero? We are sure that there would be a row (row &gt; i) that has
 non-zero at col i (otherwise A is not invertable). We then exchange this
 two rows using a perturbation matrix <span
 class="math inline">\(P_i\)</span> that reorders the rows of A.</p>
-<p><code>$$ ...E_iP(i, s_i)...A = ...E_iP(i, s_i)...b $$</code></p>
+<p><span class="math display">\[
+...E_iP(i, s_i)...A = ...E_iP(i, s_i)...b
+\]</span></p>
 <p>For every row, we can exchange two rows using <span
 class="math inline">\(P_i\)</span> such that the current row i has the
 largest absolute value of i th column element. This is called
 "Pivoting". It can be proved(<a
 href="https://link.zhihu.com/?target=https%3A//www.amazon.com/Numerical-Linear-Algebra-Lloyd-Trefethen/dp/0898713617">https://link.zhihu.com/?target=https%3A//www.amazon.com/Numerical-Linear-Algebra-Lloyd-Trefethen/dp/0898713617</a>)
 that</p>
-<p><code>$$ PA = LU $$</code></p>
+<p><span class="math display">\[
+PA = LU
+\]</span></p>
 <p>where</p>
-<p><code>$$ P=P\left(n-1, s_&#123;n-1&#125;\right) \ldots P\left(2, s_&#123;2&#125;\right) P\left(1, s_&#123;1&#125;\right) $$</code></p>
+<p><span class="math display">\[
+P=P\left(n-1, s_{n-1}\right) \ldots P\left(2, s_{2}\right) P\left(1,
+s_{1}\right)
+\]</span></p>
 <p>The first step uses <span class="math inline">\(2n(n-1)\)</span>
 operations (multiplication + addition = 2 floating-point operations),
 the second uses <span class="math inline">\(2(n-1)(n-2)\)</span>... so
@@ -157,8 +268,9 @@ class="math inline">\(O(n^2)\)</span></p>
 class="math inline">\((P^{T})LU\)</span>. How can we get <span
 class="math inline">\(P, L, U\)</span>?</p>
 <h3 id="by-gauss-elimination">By Gauss elimination</h3>
-<p>From Gauss elimination we know
-<code>$$ L = E^&#123;-1&#125;_1E^&#123;-1&#125;_2...E^&#123;-1&#125;_n $$</code></p>
+<p>From Gauss elimination we know <span class="math display">\[
+L = E^{-1}_1E^{-1}_2...E^{-1}_n
+\]</span></p>
 <p>And we can get <span class="math inline">\(L\)</span> by
 multiplication and inverse of these lower triangular matrices. Note that
 for lower triangular matrices <span class="math inline">\(E_i\)</span>
@@ -185,9 +297,11 @@ class="math inline">\(b\)</span></p>
 <h2 id="lup-decomposition">LUP decomposition</h2>
 <p>Every time we left-multiply a perturbation matrix <span
 class="math inline">\(P\)</span> and get</p>
-<p><code>$$ E_&#123;n-1&#125; P_&#123;n-1&#125; \ldots E_&#123;2&#125; P_&#123;2&#125; E_&#123;1&#125; P_&#123;1&#125; A=U $$</code>
-=&gt;
-<code>$$ PA = LU,\text &#123; where &#125; P=\prod_&#123;i=1&#125;^&#123;n-1&#125; P_&#123;i&#125; $$</code></p>
+<p><span class="math display">\[
+E_{n-1} P_{n-1} \ldots E_{2} P_{2} E_{1} P_{1} A=U
+\]</span> =&gt; <span class="math display">\[
+PA = LU,\text { where } P=\prod_{i=1}^{n-1} P_{i}
+\]</span></p>
 <p>Though swapping two rows each time, the complexity is still <span
 class="math inline">\(O(2n^3/3)\)</span>
 (我觉得好像是这样...最多多出来<span
@@ -252,11 +366,11 @@ class="math inline">\(O(n^2)\)</span>次操作...)</p>
       <ul>
         
           <li>
-            <a href="/2024/01/27/story/">故事</a>
+            <a href="/2024/03/07/diary/">正经人谁写日记啊</a>
           </li>
         
           <li>
-            <a href="/2023/06/19/diary/">正经人谁写日记啊</a>
+            <a href="/2024/01/27/story/">故事</a>
           </li>
         
           <li>
@@ -264,7 +378,7 @@ class="math inline">\(O(n^2)\)</span>次操作...)</p>
           </li>
         
           <li>
-            <a href="/2023/04/02/cs440/">CS440 Rendering Engine</a>
+            <a href="/2023/04/02/VulkanBasic/">Vulkan学习(1) Basics</a>
           </li>
         
           <li>
