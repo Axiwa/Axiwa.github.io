@@ -15,12 +15,12 @@
   
   <title>CS440 Rendering Engine | Azure</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="基于PBRT的离线渲染引擎，基本框架是Nori. What we have done in this course and project is to extend this basic renderer to support more full-fledged physically-based lighting&#x2F;integrating&#x2F;bsdf functions... The technica">
+  <meta name="description" content="基于PBRT的离线渲染引擎，基本框架是Nori. 现在看来我的技术报告里充满了bug，呜呜呜。但是依然超级感谢上了这门课和老师助教 T_T">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS440 Rendering Engine">
 <meta property="og:url" content="http://axiwa.github.io/2023/04/02/cs440/index.html">
 <meta property="og:site_name" content="Azure">
-<meta property="og:description" content="基于PBRT的离线渲染引擎，基本框架是Nori. What we have done in this course and project is to extend this basic renderer to support more full-fledged physically-based lighting&#x2F;integrating&#x2F;bsdf functions... The technica">
+<meta property="og:description" content="基于PBRT的离线渲染引擎，基本框架是Nori. 现在看来我的技术报告里充满了bug，呜呜呜。但是依然超级感谢上了这门课和老师助教 T_T">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://axiwa.github.io/images/proposal.jpg">
 <meta property="og:image" content="http://axiwa.github.io/images/sky.png">
@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://axiwa.github.io/images/memory_peak.png">
 <meta property="og:image" content="http://axiwa.github.io/images/memory_render.png">
 <meta property="article:published_time" content="2023-04-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-07T10:47:20.915Z">
+<meta property="article:modified_time" content="2024-03-08T01:54:45.321Z">
 <meta property="article:author" content="Axiwa">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://axiwa.github.io/images/proposal.jpg">
@@ -115,10 +115,8 @@
         <p>基于<a
 target="_blank" rel="noopener" href="https://pbr-book.org/">PBRT</a>的离线渲染引擎，基本框架是<a
 target="_blank" rel="noopener" href="http://rgl.epfl.ch/software/Nori2">Nori</a>.</p>
-<p>What we have done in this course and project is to extend this basic
-renderer to support more full-fledged physically-based
-lighting/integrating/bsdf functions...</p>
-<p>The technical details in this passage may not be perfect.</p>
+<p>现在看来我的技术报告里充满了bug，呜呜呜。但是依然超级感谢上了这门课和老师助教
+T_T</p>
 <span id="more"></span>
 <p>Final project was to choose several features from many choices and
 realize them. What I chose were modeling using Blender, Texture,
@@ -232,6 +230,7 @@ function to give the next direction and corresponding probability. I use
 the graph below to show my path tracer. I assume that there is no
 emitter inside the medium</p>
 <p><img src="/images/homo.jpg" /></p>
+<p><em>这里还漏掉了一种，就是光线从外面打入media，又打出去，再打到物体的情况</em></p>
 <p><strong>Design choice</strong></p>
 <p>As the figure shows, we need to consider different situations. I will
 follow the code logic to explain each of them. In my implementation the
