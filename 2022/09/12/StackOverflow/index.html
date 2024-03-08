@@ -197,7 +197,7 @@ mjx-container[display="true"] + br {
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://axiwa.github.io/2022/09/12/StackOverflow/" data-id="clti0v4vv0000zccuf21i4z64" class="leave-reply bdsharebuttonbox" data-cmd="more"></a>
+            <a href="javascript:void(0);" data-url="http://axiwa.github.io/2022/09/12/StackOverflow/" data-id="cltiebek00005uucu50rcakm0" class="leave-reply bdsharebuttonbox" data-cmd="more"></a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -225,8 +225,7 @@ via Ubuntu Software, open Ubuntu Software, look for the app in the
 installed category, and click on remove.</p>
 <p><strong>Remove settings</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cd</span> ~ &amp;&amp; <span class="built_in">rm</span> -rf .vscode &amp;&amp; <span class="built_in">rm</span> -rf .config/Code</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 <h3 id="tex">Tex</h3>
-<p><strong>Making CV with resumeSubheading mode</strong> <a
-target="_blank" rel="noopener" href="https://tex.stackexchange.com/questions/407982/adding-an-another-line">How
+<p><strong>Making CV with resumeSubheading mode</strong> <a target="_blank" rel="noopener" href="https://tex.stackexchange.com/questions/407982/adding-an-another-line">How
 to add another line</a></p>
 <h3 id="c">C++</h3>
 <p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28139230">如何理解
@@ -241,7 +240,7 @@ using <code>cudaMallocManaged</code> <figure class="highlight c"><table><tr><td 
 memory to <code>a</code> using Unified Memory system, if I use
 <code>a = v.data()</code>, it is lost!</p>
 <h4 id="cuda">CUDA</h4>
-<p>When I declared an array in cuda kernel like this: <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="type">int</span> thread_id = blockDim.x * blockIdx.x + threadIdx.x;</span><br><span class="line">    <span class="type">double</span> * shared = new <span class="type">double</span>[nonzero];</span><br><span class="line">    <span class="keyword">if</span> (thread_id &lt; nonzero)&#123;</span><br><span class="line">      shared[thread_id] = x[col[thread_id]]*value[thread_id]; </span><br><span class="line">      atomicAdd(&amp;Ap[row[thread_id]], shared[thread_id]);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>When I declared an array in cuda kernel like this: <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    ...</span><br><span class="line">    <span class="type">int</span> thread_id = blockDim.x * blockIdx.x + threadIdx.x;</span><br><span class="line">    <span class="type">double</span> * shared = new <span class="type">double</span>[nonzero];</span><br><span class="line">    <span class="keyword">if</span> (thread_id &lt; nonzero){</span><br><span class="line">      shared[thread_id] = x[col[thread_id]]*value[thread_id]; </span><br><span class="line">      atomicAdd(&amp;Ap[row[thread_id]], shared[thread_id]);</span><br><span class="line">    ...</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 After several calls to the kernel, it will crash. It is indeed awful
 code, but I don't know it is fatally wrong. I kept <code>shared</code>
 because I wanted to try for shared memory later and remove atomic
@@ -252,18 +251,14 @@ MISTAKES!)</p>
 const</h4>
 <p><a target="_blank" rel="noopener" href="http://c-faq.com/decl/spiral.anderson.html">Clockwise/Sprial
 Rule</a></p>
-<p><a
-target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1143262/what-is-the-difference-between-const-int-const-int-const-and-int-const"
-class="uri">https://stackoverflow.com/questions/1143262/what-is-the-difference-between-const-int-const-int-const-and-int-const</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1143262/what-is-the-difference-between-const-int-const-int-const-and-int-const" class="uri">https://stackoverflow.com/questions/1143262/what-is-the-difference-between-const-int-const-int-const-and-int-const</a></p>
 <h3 id="apt-get报错">apt-get报错</h3>
 <ol type="1">
 <li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E: Encountered a section with no Package: header</span><br><span class="line">E: Problem with MergeList /var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_natty_main_binary-i386_Packages</span><br><span class="line">E: The package lists or status file could not be parsed or opened.</span><br></pre></td></tr></table></figure>
-<p><a
-target="_blank" rel="noopener" href="https://askubuntu.com/questions/30072/how-do-i-fix-a-problem-with-mergelist-or-status-file-could-not-be-parsed-err">How
+<p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/30072/how-do-i-fix-a-problem-with-mergelist-or-status-file-could-not-be-parsed-err">How
 do I fix a "Problem with MergeList" or "status file could not be parsed"
 error when trying to do an update?</a></p></li>
-<li><p><a
-target="_blank" rel="noopener" href="https://askubuntu.com/questions/760896/how-can-i-fix-apt-error-w-target-packages-is-configured-multiple-times">How
+<li><p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/760896/how-can-i-fix-apt-error-w-target-packages-is-configured-multiple-times">How
 can I fix apt error "W: Target Packages ... is configured multiple
 times"?</a></p></li>
 <li><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4a409053575a">Ubuntu
@@ -280,21 +275,14 @@ axiwa_id.pub/axiwa_id)，把<code>.pub</code>放到remote
 machine的<code>.ssh/autorized_keys里，</code>~/ssh/config<code>里面添加</code>IdentityFile
 ~/.ssh/axiwa_id`</p>
 <h3 id="ubuntu-20-无法使用虚拟机">Ubuntu 20 无法使用虚拟机:</h3>
-<p>最完整有用的办法！<a target="_blank" rel="noopener" href="http://askonline.tech/ask/9339.html"
-class="uri">http://askonline.tech/ask/9339.html</a></p>
+<p>最完整有用的办法！<a target="_blank" rel="noopener" href="http://askonline.tech/ask/9339.html" class="uri">http://askonline.tech/ask/9339.html</a></p>
 <h3 id="虚拟机无法使用shared文件夹">虚拟机无法使用shared文件夹</h3>
-<p>首先自己的host machine上装好.iso<a
-target="_blank" rel="noopener" href="https://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm"
-class="uri">https://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm</a></p>
-<p>然后给虚拟机挂好，虚拟机挂不好说明虚拟机的虚拟机需要更新<a
-target="_blank" rel="noopener" href="https://superuser.com/questions/760327/vbox-guest-additions-iso-cant-be-mounted-because-of-verr-pdm-media-locked"
-class="uri">https://superuser.com/questions/760327/vbox-guest-additions-iso-cant-be-mounted-because-of-verr-pdm-media-locked</a></p>
+<p>首先自己的host machine上装好.iso<a target="_blank" rel="noopener" href="https://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm" class="uri">https://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm</a></p>
+<p>然后给虚拟机挂好，虚拟机挂不好说明虚拟机的虚拟机需要更新<a target="_blank" rel="noopener" href="https://superuser.com/questions/760327/vbox-guest-additions-iso-cant-be-mounted-because-of-verr-pdm-media-locked" class="uri">https://superuser.com/questions/760327/vbox-guest-additions-iso-cant-be-mounted-because-of-verr-pdm-media-locked</a></p>
 <p>网友都太厉害了</p>
 <h3 id="nvidia-driver-and-cuda">NVIDIA DRIVER AND CUDA</h3>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pprp/p/9430836.html"
-class="uri">https://www.cnblogs.com/pprp/p/9430836.html</a> 驱动安装</p>
-<p><a target="_blank" rel="noopener" href="https://ubuntu.com/blog/how-to-sign-things-for-secure-boot"
-class="uri">https://ubuntu.com/blog/how-to-sign-things-for-secure-boot</a>安全启动模式下怎么添加key</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pprp/p/9430836.html" class="uri">https://www.cnblogs.com/pprp/p/9430836.html</a> 驱动安装</p>
+<p><a target="_blank" rel="noopener" href="https://ubuntu.com/blog/how-to-sign-things-for-secure-boot" class="uri">https://ubuntu.com/blog/how-to-sign-things-for-secure-boot</a>安全启动模式下怎么添加key</p>
 <h3 id="怎么用命令行进行格式化">怎么用命令行进行格式化</h3>
 <p>先卸载，再格式化</p>
 <p>卸载: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo umount /media/disk</span><br></pre></td></tr></table></figure></p>
@@ -302,20 +290,14 @@ class="uri">https://ubuntu.com/blog/how-to-sign-things-for-secure-boot</a>安全
 <p>知道自己的U盘叫什么 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk -l</span><br></pre></td></tr></table></figure> device: /dev/sdb</p>
 <p>格式化 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs.vfat /dev/sdb</span><br></pre></td></tr></table></figure></p>
 <h3 id="change-ggcc-version">Change g++/gcc version</h3>
-<p><a
-target="_blank" rel="noopener" href="https://askubuntu.com/questions/26498/how-to-choose-the-default-gcc-and-g-version"
-class="uri">https://askubuntu.com/questions/26498/how-to-choose-the-default-gcc-and-g-version</a></p>
+<p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/26498/how-to-choose-the-default-gcc-and-g-version" class="uri">https://askubuntu.com/questions/26498/how-to-choose-the-default-gcc-and-g-version</a></p>
 <h3 id="how-to-find-which-cpu-core-a-process-is-running-on">How to find
 which CPU core a process is running on</h3>
-<p><a target="_blank" rel="noopener" href="https://www.xmodulo.com/cpu-core-process-is-running.html"
-class="uri">https://www.xmodulo.com/cpu-core-process-is-running.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.xmodulo.com/cpu-core-process-is-running.html" class="uri">https://www.xmodulo.com/cpu-core-process-is-running.html</a></p>
 <h3 id="perlbash">Perl&amp;bash</h3>
-<p><a
-target="_blank" rel="noopener" href="https://linuxconfig.org/how-to-propagate-a-signal-to-child-processes-from-a-bash-script"
-class="uri">https://linuxconfig.org/how-to-propagate-a-signal-to-child-processes-from-a-bash-script</a></p>
+<p><a target="_blank" rel="noopener" href="https://linuxconfig.org/how-to-propagate-a-signal-to-child-processes-from-a-bash-script" class="uri">https://linuxconfig.org/how-to-propagate-a-signal-to-child-processes-from-a-bash-script</a></p>
 <h3 id="ubuntu的设置栏不见了">Ubuntu的设置栏不见了</h3>
-<p><a target="_blank" rel="noopener" href="https://serverok.in/ubuntu-20-04-settings-wont-open"
-class="uri">https://serverok.in/ubuntu-20-04-settings-wont-open</a></p>
+<p><a target="_blank" rel="noopener" href="https://serverok.in/ubuntu-20-04-settings-wont-open" class="uri">https://serverok.in/ubuntu-20-04-settings-wont-open</a></p>
 
       
     </div><!-- .entry-content -->
