@@ -15,16 +15,16 @@
   
   <title>Scala notes | Azure</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Elements Evaluation strategy Call-by-value: A strict evaluation strategy, in which the expression is evaluated and bound to the corresponding parameter before the function body is evaluated.  The val">
+  <meta name="description" content="Elements Evaluation strategy Call-by-value: A strict evaluation strategy, in which the expression is evaluated and bound to the corresponding parameter before the function body is evaluated.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scala notes">
 <meta property="og:url" content="http://axiwa.github.io/2023/04/02/scalaReview/index.html">
 <meta property="og:site_name" content="Azure">
-<meta property="og:description" content="Elements Evaluation strategy Call-by-value: A strict evaluation strategy, in which the expression is evaluated and bound to the corresponding parameter before the function body is evaluated.  The val">
+<meta property="og:description" content="Elements Evaluation strategy Call-by-value: A strict evaluation strategy, in which the expression is evaluated and bound to the corresponding parameter before the function body is evaluated.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://axiwa.github.io/images/precedence.png">
 <meta property="article:published_time" content="2023-04-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-07T11:02:52.445Z">
+<meta property="article:modified_time" content="2024-03-08T04:00:11.588Z">
 <meta property="article:author" content="Axiwa">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://axiwa.github.io/images/precedence.png">
@@ -99,7 +99,7 @@
 <p>A strict evaluation strategy, in which the expression is evaluated
 and bound to the corresponding parameter before the function body is
 evaluated.</p>
-<hr />
+<span id="more"></span>
 <p>The <code>val</code> form is CBV. <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> z =&#123;</span><br><span class="line">    println(<span class="string">&quot;z&quot;</span>);</span><br><span class="line">    <span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> Running this will
 give <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z</span><br><span class="line"><span class="keyword">val</span> z: <span class="type">Int</span> = <span class="number">3</span></span><br></pre></td></tr></table></figure> Calling <code>z</code> will not print "z" because it
 has been evaluated while defined.</p>
